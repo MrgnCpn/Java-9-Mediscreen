@@ -70,8 +70,12 @@ public class DatabaseConfiguration implements DatabaseConfigurationInterface {
             logger.error("Error fetching database properties");
             throw new NullPointerException("Error fetching database properties");
         }
+
         return DriverManager.getConnection(
-                "jdbc:mysql://" + this.host + ":" + this.port + "/" + this.database, this.user, this.password);
+                "jdbc:mysql://" + this.host + ":" + this.port + "/" + this.database,
+                this.user,
+                this.password
+        );
     }
 
     /**

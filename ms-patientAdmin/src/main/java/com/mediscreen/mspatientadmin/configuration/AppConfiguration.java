@@ -5,6 +5,7 @@ import com.mediscreen.mspatientadmin.interfaces.*;
 import com.mediscreen.mspatientadmin.service.CountryService;
 import com.mediscreen.mspatientadmin.service.HTTPRequestService;
 import com.mediscreen.mspatientadmin.service.PatientService;
+import com.mediscreen.mspatientadmin.service.SecurityService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -38,5 +39,10 @@ public class AppConfiguration {
     @Bean
     public PatientServiceInterface patientService() {
         return new PatientService(patientDao());
+    }
+
+    @Bean
+    public SecurityServiceInterface securityService() {
+        return new SecurityService();
     }
 }
