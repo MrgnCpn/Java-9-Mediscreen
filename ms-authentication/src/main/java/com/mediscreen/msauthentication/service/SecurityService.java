@@ -52,7 +52,9 @@ public class SecurityService implements SecurityServiceInterface {
                 Map<String, Object> claims = new HashMap<>();
                 claims.put("userID", uuid.toString());
                 claims.put("username", userLogin.getPassword());
-                return jwtServiceInterface.createJWT(uuid, "Login", "Mediscreen", claims, (long) 60 * 60 * 24 * 90);
+                Long time = (long) 60 * 60 * 24;
+                if (userLogin.isRememberUser()) time *= 90;
+                return jwtServiceInterface.createJWT(uuid, "Login", "Mediscreen", claims, time);
             } else {
                 throw new NotAllowedException("Username and/or password are incorrect");
             }
