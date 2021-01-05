@@ -1,9 +1,10 @@
 package com.mediscreen.mspatientadmin.configuration;
 
 import com.mediscreen.mspatientadmin.dao.PatientDao;
-import com.mediscreen.mspatientadmin.interfaces.*;
-import com.mediscreen.mspatientadmin.service.CountryService;
-import com.mediscreen.mspatientadmin.service.HTTPRequestService;
+import com.mediscreen.mspatientadmin.interfaces.DatabaseConfigurationInterface;
+import com.mediscreen.mspatientadmin.interfaces.PatientDaoInterface;
+import com.mediscreen.mspatientadmin.interfaces.PatientServiceInterface;
+import com.mediscreen.mspatientadmin.interfaces.SecurityServiceInterface;
 import com.mediscreen.mspatientadmin.service.PatientService;
 import com.mediscreen.mspatientadmin.service.SecurityService;
 import org.springframework.context.annotation.Bean;
@@ -19,16 +20,6 @@ public class AppConfiguration {
     @Bean
     public DatabaseConfigurationInterface databaseConfiguration() {
         return new DatabaseConfiguration(applicationProperties());
-    }
-
-    @Bean
-    public HTTPRequestServiceInterface httpRequestService() {
-        return new HTTPRequestService();
-    }
-
-    @Bean
-    public CountryServiceInterface countryService(){
-        return new CountryService(httpRequestService());
     }
 
     @Bean

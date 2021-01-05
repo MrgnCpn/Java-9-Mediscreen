@@ -3,7 +3,7 @@ package com.mediscreen.mspatientadmin.controller;
 import com.mediscreen.mspatientadmin.exception.NotFoundException;
 import com.mediscreen.mspatientadmin.interfaces.PatientServiceInterface;
 import com.mediscreen.mspatientadmin.interfaces.SecurityServiceInterface;
-import com.mediscreen.mspatientadmin.model.Patient;
+import com.mediscreen.mspatientadmin.models.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +22,17 @@ public class PatientController {
     private SecurityServiceInterface securityService;
 
     @GetMapping("/patient/getAll")
-    public List<Patient> getPatient(@RequestHeader("token") String token) {
+    public List<Patient> getAllPatients(@RequestHeader("token") String token) {
         securityService.authenticationCheck(token);
         List<Patient> patientList = patientService.getAllPatient();
+        if (patientList == null) throw new NotFoundException("No data found");
+        return patientList;
+    }
+
+    @GetMapping("/patient/search")
+    public List<Patient> searchPatients(@RequestHeader("token") String token, @RequestParam(required = true) String search) {
+        securityService.authenticationCheck(token);
+        List<Patient> patientList = patientService.searchPatient(search);
         if (patientList == null) throw new NotFoundException("No data found");
         return patientList;
     }

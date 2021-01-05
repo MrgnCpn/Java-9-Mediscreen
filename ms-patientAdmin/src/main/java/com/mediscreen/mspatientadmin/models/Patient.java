@@ -1,4 +1,4 @@
-package com.mediscreen.mspatientadmin.model;
+package com.mediscreen.mspatientadmin.models;
 
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -29,9 +29,9 @@ public class Patient {
     @Length(max=50, message = "Max length : 50")
     private String phone;
 
-    private Country country;
+    private String country;
 
-    public Patient(Integer id, String firstname, String lastname, String sexe, LocalDate birthday, String address, String email, String phone, Country country) {
+    public Patient(Integer id, String firstname, String lastname, String sexe, LocalDate birthday, String address, String email, String phone, String country) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -110,11 +110,11 @@ public class Patient {
         this.phone = phone;
     }
 
-    public Country getCountry() {
+    public String getCountry() {
         return country;
     }
 
-    public void setCountry(Country country) {
+    public void setCountry(String country) {
         this.country = country;
     }
 }

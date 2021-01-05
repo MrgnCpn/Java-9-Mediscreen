@@ -2,8 +2,7 @@ package com.mediscreen.mspatientadmin.dao;
 
 import com.mediscreen.mspatientadmin.interfaces.DatabaseConfigurationInterface;
 import com.mediscreen.mspatientadmin.interfaces.PatientDaoInterface;
-import com.mediscreen.mspatientadmin.model.Country;
-import com.mediscreen.mspatientadmin.model.Patient;
+import com.mediscreen.mspatientadmin.models.Patient;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -31,7 +30,7 @@ public class PatientDao extends DaoManager implements PatientDaoInterface {
         PreparedStatement ps = null;
 
         StringBuilder sql = new StringBuilder();
-        sql.append("SELECT firstname, lastname, sexe, birthday, address, email, phone, country_code");
+        sql.append("SELECT firstname, lastname, sexe, birthday, address, email, phone, country");
         sql.append(" FROM patient");
         sql.append(" WHERE id = ?");
 
@@ -50,7 +49,7 @@ public class PatientDao extends DaoManager implements PatientDaoInterface {
                 result.setAddress(rs.getString("address"));
                 result.setEmail(rs.getString("email"));
                 result.setPhone(rs.getString("phone"));
-                result.setCountry(new Country(rs.getString("country_code")));
+                result.setCountry(rs.getString("country"));
             }
         } catch (Exception e){
             super.logger.error("PatientDao.getPatientById() -> Error fetching patient", e);
@@ -78,8 +77,9 @@ public class PatientDao extends DaoManager implements PatientDaoInterface {
         PreparedStatement ps = null;
 
         StringBuilder sql = new StringBuilder();
-        sql.append("SELECT id, firstname, lastname, sexe, birthday, address, email, phone, country_code");
+        sql.append("SELECT id, firstname, firstname, sexe, birthday, address, email, phone, country");
         sql.append(" FROM patient");
+        sql.append(" ORDER BY firstname");
 
         try {
             con = databaseConfiguration.getConnection();
@@ -96,7 +96,7 @@ public class PatientDao extends DaoManager implements PatientDaoInterface {
                 patient.setAddress(rs.getString("address"));
                 patient.setEmail(rs.getString("email"));
                 patient.setPhone(rs.getString("phone"));
-                patient.setCountry(new Country(rs.getString("country_code")));
+                patient.setCountry(rs.getString("country"));
                 result.add(patient);
             }
             if(result.size() <= 0) {
@@ -119,7 +119,7 @@ public class PatientDao extends DaoManager implements PatientDaoInterface {
         PreparedStatement ps = null;
 
         StringBuilder sql = new StringBuilder();
-        sql.append("UPDATE patient SET firstname = ?, lastname = ?, sexe = ?, birthday = ?, address = ?, email = ?, phone = ?, country_code = ?");
+        sql.append("UPDATE patient SET firstname = ?, lastname = ?, sexe = ?, birthday = ?, address = ?, email = ?, phone = ?, country = ?");
         sql.append(" WHERE id = ?");
 
         try {
@@ -132,7 +132,7 @@ public class PatientDao extends DaoManager implements PatientDaoInterface {
             ps.setString(5, patient.getAddress());
             ps.setString(6, patient.getEmail());
             ps.setString(7, patient.getPhone());
-            ps.setString(8, patient.getCountry().getCode());
+            ps.setString(8, patient.getCountry());
             ps.setInt(9, patient.getId());
             ps.execute();
             super.logger.info("PatientDao.updatePatient() -> Profile updated for patient : " + patient.getId());
@@ -155,7 +155,7 @@ public class PatientDao extends DaoManager implements PatientDaoInterface {
         PreparedStatement ps = null;
 
         StringBuilder sql = new StringBuilder();
-        sql.append("INSERT INTO patient (firstname, lastname, sexe, birthday, address, email, phone, country_code)");
+        sql.append("INSERT INTO patient (firstname, lastname, sexe, birthday, address, email, phone, country)");
         sql.append(" VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
         try {
@@ -168,7 +168,7 @@ public class PatientDao extends DaoManager implements PatientDaoInterface {
             ps.setString(5, patient.getAddress());
             ps.setString(6, patient.getEmail());
             ps.setString(7, patient.getPhone());
-            ps.setString(8, patient.getCountry().getCode());
+            ps.setString(8, patient.getCountry());
             ps.execute();
             super.logger.info("PatientDao.createPatient() -> Profile created");
             return this.getPatientById(super.getMaxId("patient"));

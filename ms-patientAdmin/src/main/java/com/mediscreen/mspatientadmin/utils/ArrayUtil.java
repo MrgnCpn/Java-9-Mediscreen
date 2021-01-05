@@ -5,9 +5,9 @@ import java.util.*;
 /**
  * @author MorganCpn
  */
-public class MSArrayUtil {
+public class ArrayUtil {
 
-    private MSArrayUtil() { }
+    private ArrayUtil() { }
 
     /**
      * Sort map by key

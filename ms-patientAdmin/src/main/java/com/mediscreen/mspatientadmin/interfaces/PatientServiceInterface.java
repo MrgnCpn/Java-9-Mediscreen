@@ -1,6 +1,6 @@
 package com.mediscreen.mspatientadmin.interfaces;
 
-import com.mediscreen.mspatientadmin.model.Patient;
+import com.mediscreen.mspatientadmin.models.Patient;
 
 import java.util.List;
 
@@ -39,4 +39,11 @@ public interface PatientServiceInterface {
      * @return
      */
     boolean deletePatientById(Integer id);
+
+    /**
+     * Search patient
+     * @param search
+     * @return
+     */
+    List<Patient> searchPatient(String search);
 }

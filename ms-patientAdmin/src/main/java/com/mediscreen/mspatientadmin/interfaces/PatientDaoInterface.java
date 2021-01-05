@@ -1,6 +1,6 @@
 package com.mediscreen.mspatientadmin.interfaces;
 
-import com.mediscreen.mspatientadmin.model.Patient;
+import com.mediscreen.mspatientadmin.models.Patient;
 
 import java.util.List;
 
