@@ -3,7 +3,7 @@ package com.mediscreen.msauthentication.models;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-public class UserLogin {
+public class Login {
     @NotBlank
     private String username;
 
@@ -13,13 +13,13 @@ public class UserLogin {
     @NotNull
     private boolean rememberUser;
 
-    public UserLogin(String username, String password, boolean rememberUser) {
+    public Login(String username, String password, boolean rememberUser) {
         this.username = username;
         this.password = password;
         this.rememberUser = rememberUser;
     }
 
-    public UserLogin() {
+    public Login() {
     }
 
     public String getUsername() {

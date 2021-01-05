@@ -1,15 +1,15 @@
 package com.mediscreen.msauthentication.interfaces;
 
 import com.mediscreen.msauthentication.models.Jwt;
-import com.mediscreen.msauthentication.models.UserLogin;
+import com.mediscreen.msauthentication.models.Login;
 
 public interface SecurityServiceInterface {
     /**
      * Log user
-     * @param userLogin
+     * @param login
      * @return
      */
-    Jwt logUser(UserLogin userLogin);
+    Jwt logUser(Login login);
 
     /**
      * Check if user is logging

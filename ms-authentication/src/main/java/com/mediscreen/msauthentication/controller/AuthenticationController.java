@@ -2,7 +2,7 @@ package com.mediscreen.msauthentication.controller;
 
 import com.mediscreen.msauthentication.interfaces.SecurityServiceInterface;
 import com.mediscreen.msauthentication.models.Jwt;
-import com.mediscreen.msauthentication.models.UserLogin;
+import com.mediscreen.msauthentication.models.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +16,8 @@ public class AuthenticationController {
     private SecurityServiceInterface securityService;
 
     @PostMapping("/generate-token")
-    public ResponseEntity<Jwt> generateToken(@Valid @RequestBody UserLogin userLogin){
-        return new ResponseEntity<>(securityService.logUser(userLogin), HttpStatus.OK);
+    public ResponseEntity<Jwt> generateToken(@Valid @RequestBody Login login){
+        return new ResponseEntity<>(securityService.logUser(login), HttpStatus.OK);
     }
 
     @GetMapping("/validate-token")
