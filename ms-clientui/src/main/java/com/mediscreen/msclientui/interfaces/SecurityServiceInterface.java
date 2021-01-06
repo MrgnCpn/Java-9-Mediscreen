@@ -11,7 +11,7 @@ public interface SecurityServiceInterface {
      * @param token
      * @return
      */
-    void authenticationCheck(String token);
+    boolean authenticationCheck(String token);
 
     /**
      * Check if user is log, read token and validate it
@@ -25,5 +25,5 @@ public interface SecurityServiceInterface {
      * @param login
      * @return
      */
-    Map<String, String> logUser(Login login);
+    void logUser(Login login, HttpSession session);
 }

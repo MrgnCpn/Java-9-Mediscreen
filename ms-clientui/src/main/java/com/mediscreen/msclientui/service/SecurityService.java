@@ -3,6 +3,7 @@ package com.mediscreen.msclientui.service;
 import com.mediscreen.msclientui.exception.EmptyDataException;
 import com.mediscreen.msclientui.exception.NotAllowedException;
 import com.mediscreen.msclientui.interfaces.SecurityServiceInterface;
+import com.mediscreen.msclientui.models.Jwt;
 import com.mediscreen.msclientui.models.Login;
 import com.mediscreen.msclientui.proxy.MSZuulProxy;
 import org.apache.commons.lang.StringUtils;
@@ -11,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import javax.servlet.http.HttpSession;
-import java.util.Map;
 
 public class SecurityService implements SecurityServiceInterface {
     /**
@@ -27,10 +27,11 @@ public class SecurityService implements SecurityServiceInterface {
      * @see SecurityServiceInterface {@link #authenticationCheck(String)}
      */
     @Override
-    public void authenticationCheck(String token) {
+    public boolean authenticationCheck(String token) {
         if (StringUtils.isBlank(token)) throw new EmptyDataException("The authentication token is required");
         ResponseEntity<Void> validation = msZuulProxy.msAuthentication_validateToken(token);
         if (!validation.getStatusCode().equals(HttpStatus.OK)) throw new NotAllowedException("Permission denied");
+        return true;
     }
 
     /**
@@ -38,14 +39,27 @@ public class SecurityService implements SecurityServiceInterface {
      */
     @Override
     public boolean isLog(HttpSession session){
-        return true;
+        String token = (String) session.getAttribute("token");
+        if(token != null && !StringUtils.isBlank(token)) return authenticationCheck(token);
+        return false;
     }
 
     /**
-     * @see SecurityServiceInterface {@link #logUser(Login)}
+     * @see SecurityServiceInterface {@link #logUser(Login, HttpSession)}
      */
     @Override
-    public Map<String, String> logUser(Login login){
-        return null;
+    public void logUser(Login login, HttpSession session){
+        if (!StringUtils.isBlank(login.getUsername()) && !StringUtils.isBlank(login.getPassword())) {
+            try {
+                ResponseEntity<Jwt> jwt = msZuulProxy.msAuthentication_generateToken(login);
+                if (jwt.getStatusCode().equals(HttpStatus.OK) && jwt.getBody() != null && jwt.getBody().getToken() != null) {
+                    session.setAttribute("token", jwt.getBody().getToken());
+                }
+            } catch (NotAllowedException e) {
+                throw new NotAllowedException("Permission denied, username or password are incorrect");
+            }
+        } else {
+            throw new EmptyDataException("Username and password are required");
+        }
     }
 }

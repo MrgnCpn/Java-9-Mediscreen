@@ -10,7 +10,6 @@ public class Login {
     @NotBlank
     private String password;
 
-    @NotNull
     private boolean rememberUser;
 
     public Login(String username, String password, boolean rememberUser) {

@@ -85,6 +85,13 @@ input:disabled {
 
     }
 
+    .form_error_msg {
+        margin: 0 auto 20px auto;
+        font-size: 10px;
+        letter-spacing: 2px;
+        color: var(--color_red);
+    }
+
 /* TEXT / TEXTAREA */
     .form_ipt_txt, .form_ipt_textarea {
         border: 1.5px solid var(--color_greyE1);

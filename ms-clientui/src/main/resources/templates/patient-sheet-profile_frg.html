@@ -2,6 +2,7 @@
 <body>
     <div th:fragment="patient-sheet-profile" id="patient-sheet-profile" class="main_section_subSection hght_100 block">
         <form class="form wdth_70" method="POST" th:action="@{/patient/${patient.getId()}/update}">
+            <p class="form_error_msg" th:text="${error} ?: ''"></p>
             <div class="form_col_ctn flex flex_row flex_justify_sp-between wdth_100">
                 <div class="form_col wdth_45">
                     <div class="form_ipt_ctn_txt">
