@@ -48,12 +48,14 @@ public class SecurityService implements SecurityServiceInterface {
      * @see SecurityServiceInterface {@link #logUser(Login, HttpSession)}
      */
     @Override
-    public void logUser(Login login, HttpSession session){
+    public String logUser(Login login, HttpSession session){
         if (!StringUtils.isBlank(login.getUsername()) && !StringUtils.isBlank(login.getPassword())) {
             try {
                 ResponseEntity<Jwt> jwt = msZuulProxy.msAuthentication_generateToken(login);
                 if (jwt.getStatusCode().equals(HttpStatus.OK) && jwt.getBody() != null && jwt.getBody().getToken() != null) {
-                    session.setAttribute("token", jwt.getBody().getToken());
+                    return jwt.getBody().getToken();
+                } else {
+                    throw new NullPointerException("JWT no generated");
                 }
             } catch (NotAllowedException e) {
                 throw new NotAllowedException("Permission denied, username or password are incorrect");

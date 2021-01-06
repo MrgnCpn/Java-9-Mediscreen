@@ -1,57 +1,58 @@
 package com.mediscreen.msclientui.interfaces;
 
 import com.mediscreen.msclientui.models.Patient;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public interface PatientServiceInterface {
 
     /**
      * Get patient by id from ms-patientAdmin
-     * @param token
+     * @param session
      * @return
      */
-    List<Patient> getAllPatients(String token);
+    List<Patient> getAllPatients(HttpSession session);
 
     /**
      * Get All patients from ms-patientAdmin
-     * @param token
+     * @param session
      * @param id
      * @return
      */
-    Patient getPatient(String token, int id);
+    Patient getPatient(HttpSession session, int id);
 
     /**
      * Create patient to ms-patientAdmin
-     * @param token
+     * @param session
      * @param patient
      * @return
      */
-    ResponseEntity<Patient> createPatient(String token, Patient patient);
+    Patient createPatient(HttpSession session, Patient patient);
 
     /**
      *  Update patient to ms-patientAdmin
-     * @param token
+     * @param session
      * @param patient
      * @return
      */
-    ResponseEntity<Patient> updatePatient(String token, Patient patient);
+    void updatePatient(HttpSession session, Patient patient);
 
     /**
      *  Delete patient to ms-patientAdmin
-     * @param token
+     * @param session
      * @param id
      * @return
      */
-    ResponseEntity<Void> deletePatient(String token, int id);
+    HttpStatus deletePatient(HttpSession session, int id);
 
     /**
      * Search patient
-     * @param token
+     * @param session
      * @param search
      * @return
      */
-    List<Patient> searchPatient(String token, String search);
+    List<Patient> searchPatient(HttpSession session, String search);
 
 }

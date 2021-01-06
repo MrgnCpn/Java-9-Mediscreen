@@ -25,5 +25,5 @@ public interface SecurityServiceInterface {
      * @param login
      * @return
      */
-    void logUser(Login login, HttpSession session);
+    String logUser(Login login, HttpSession session);
 }
