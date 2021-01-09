@@ -3,7 +3,7 @@ package com.mediscreen.msmedicalrecord.service;
 import com.mediscreen.msmedicalrecord.exception.EmptyDataException;
 import com.mediscreen.msmedicalrecord.exception.NotAllowedException;
 import com.mediscreen.msmedicalrecord.interfaces.SecurityServiceInterface;
-import com.mediscreen.msmedicalrecord.proxy.MSAuthenticationProxy;
+import com.mediscreen.msmedicalrecord.proxy.MSZuulProxy;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,10 +11,10 @@ import org.springframework.http.ResponseEntity;
 
 public class SecurityService implements SecurityServiceInterface {
     /**
-     * ms-authentication proxy
+     * ems-zuul proxy
      */
     @Autowired
-    private MSAuthenticationProxy msAuthenticationProxy;
+    private MSZuulProxy msZuulProxy;
 
     public SecurityService() {
     }
@@ -25,7 +25,7 @@ public class SecurityService implements SecurityServiceInterface {
     @Override
     public void authenticationCheck(String token) {
         if (StringUtils.isBlank(token)) throw new EmptyDataException("The authentication token is required");
-        ResponseEntity<Void> validation = msAuthenticationProxy.validateToken(token);
+        ResponseEntity<Void> validation = msZuulProxy.msAuthentication_validateToken(token);
         if (!validation.getStatusCode().equals(HttpStatus.OK)) throw new NotAllowedException("Permission denied");
     }
 }

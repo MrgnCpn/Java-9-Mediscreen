@@ -8,22 +8,25 @@ public interface MedicalRecordServiceInterface {
 
     /**
      * Get all patient medical records
+     * @param token
      * @param id
      * @return
      */
-    List<MedicalRecord> getPatientMedicalRecords(Integer id);
+    List<MedicalRecord> getPatientMedicalRecords(String token, Integer id);
 
     /**
      * Update Medical Record
+     * @param token
      * @param medicalRecord
      * @return
      */
-    MedicalRecord updateMedicalRecord(MedicalRecord medicalRecord);
+    MedicalRecord updateMedicalRecord(String token, MedicalRecord medicalRecord);
 
     /**
      * Create Medical Record
+     * @param token
      * @param medicalRecord
      * @return
      */
-    MedicalRecord createMedicalRecord(MedicalRecord medicalRecord);
+    MedicalRecord createMedicalRecord(String token, MedicalRecord medicalRecord);
 }
