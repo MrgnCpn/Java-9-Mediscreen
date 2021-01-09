@@ -18,3 +18,7 @@ mvn -N io.takari:maven:wrapper
 cd ../ms-patientAdmin || exit
 mvn -N io.takari:maven:wrapper
 ./mvnw clean
+
+cd ../ms-medicalrecord || exit
+mvn -N io.takari:maven:wrapper
+./mvnw clean

@@ -83,6 +83,20 @@ services:
             - mysql_db
         networks:
             - mediscreen-network
+
+    #ms-medicalrecord
+    ms-medicalrecord:
+        build: ./ms-medicalrecord/
+        restart: always
+        ports:
+            - "8083:8083"
+        container_name: ms-medicalrecord
+        environment:
+            - eureka.client.serviceUrl.defaultZone=http://ems-eureka:9001/eureka/
+        depends_on:
+            - ems-eureka
+        networks:
+            - mediscreen-network
 networks:
     mediscreen-network:
         driver: bridge
