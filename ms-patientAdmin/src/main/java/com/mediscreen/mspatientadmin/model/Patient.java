@@ -1,24 +1,27 @@
-package com.mediscreen.msclientui.models;
+package com.mediscreen.mspatientadmin.model;
 
-import com.mediscreen.msclientui.utils.FileUtils;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 public class Patient {
     private Integer id;
 
+    @NotBlank
     @Length(max=60, message = "Max length : 60")
     private String firstname;
 
+    @NotBlank
     @Length(max=60, message = "Max length : 60")
     private String lastname;
 
+    @NotBlank
     @Length(max = 1, message = "Max length : 1")
     private String sexe;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat
     private LocalDate birthday;
 
     @Length(max=255, message = "Max length : 255")
@@ -117,12 +120,5 @@ public class Patient {
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    public String getProfilePictureExt(){
-        return new FileUtils().getFileExtention(
-                "ms-clientui/src/main/resources/static/assets/profilePicture/" + this.getId() + "_" + this.getFirstname() + "_" + this.getLastname(),
-                "img"
-        );
     }
 }

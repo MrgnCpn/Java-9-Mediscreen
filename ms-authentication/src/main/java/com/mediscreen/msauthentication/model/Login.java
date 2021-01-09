@@ -1,4 +1,4 @@
-package com.mediscreen.msclientui.models;
+package com.mediscreen.msauthentication.model;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -10,6 +10,7 @@ public class Login {
     @NotBlank
     private String password;
 
+    @NotNull
     private boolean rememberUser;
 
     public Login(String username, String password, boolean rememberUser) {

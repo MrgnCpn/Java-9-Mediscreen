@@ -2,7 +2,7 @@ package com.mediscreen.msmedicalrecord.dao;
 
 import com.mediscreen.msmedicalrecord.interfaces.DatabaseConfigurationInterface;
 import com.mediscreen.msmedicalrecord.interfaces.MedicalRecordDaoInterface;
-import com.mediscreen.msmedicalrecord.models.MedicalRecord;
+import com.mediscreen.msmedicalrecord.model.MedicalRecord;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

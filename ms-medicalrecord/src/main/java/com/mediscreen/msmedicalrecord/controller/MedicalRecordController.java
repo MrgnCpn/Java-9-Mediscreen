@@ -3,7 +3,7 @@ package com.mediscreen.msmedicalrecord.controller;
 import com.mediscreen.msmedicalrecord.exception.NotFoundException;
 import com.mediscreen.msmedicalrecord.interfaces.MedicalRecordServiceInterface;
 import com.mediscreen.msmedicalrecord.interfaces.SecurityServiceInterface;
-import com.mediscreen.msmedicalrecord.models.MedicalRecord;
+import com.mediscreen.msmedicalrecord.model.MedicalRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

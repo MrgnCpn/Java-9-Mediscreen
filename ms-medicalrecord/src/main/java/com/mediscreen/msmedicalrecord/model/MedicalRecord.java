@@ -1,4 +1,4 @@
-package com.mediscreen.msmedicalrecord.models;
+package com.mediscreen.msmedicalrecord.model;
 
 import java.time.LocalDate;
 

@@ -1,4 +1,4 @@
-package com.mediscreen.msauthentication.models;
+package com.mediscreen.msclientui.model;
 
 import java.time.LocalDateTime;
 

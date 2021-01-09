@@ -1,5 +1,6 @@
-package com.mediscreen.msmedicalrecord.models;
+package com.mediscreen.msclientui.model;
 
+import com.mediscreen.msclientui.utils.FileUtils;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -116,5 +117,12 @@ public class Patient {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String getProfilePictureExt(){
+        return new FileUtils().getFileExtention(
+                "ms-clientui/src/main/resources/static/assets/profilePicture/" + this.getId() + "_" + this.getFirstname() + "_" + this.getLastname(),
+                "img"
+        );
     }
 }

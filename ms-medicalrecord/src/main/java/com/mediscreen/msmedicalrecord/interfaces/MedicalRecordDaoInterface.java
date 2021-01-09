@@ -1,6 +1,6 @@
 package com.mediscreen.msmedicalrecord.interfaces;
 
-import com.mediscreen.msmedicalrecord.models.MedicalRecord;
+import com.mediscreen.msmedicalrecord.model.MedicalRecord;
 
 import java.util.List;
 

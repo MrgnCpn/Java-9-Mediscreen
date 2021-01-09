@@ -4,7 +4,7 @@ import com.mediscreen.msclientui.exception.NotAllowedException;
 import com.mediscreen.msclientui.exception.NotFoundException;
 import com.mediscreen.msclientui.interfaces.PatientServiceInterface;
 import com.mediscreen.msclientui.interfaces.SecurityServiceInterface;
-import com.mediscreen.msclientui.models.Patient;
+import com.mediscreen.msclientui.model.Patient;
 import com.mediscreen.msclientui.proxy.MSZuulProxy;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

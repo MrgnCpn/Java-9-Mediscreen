@@ -1,6 +1,6 @@
 package com.mediscreen.msmedicalrecord.proxy;
 
-import com.mediscreen.msmedicalrecord.models.Patient;
+import com.mediscreen.msmedicalrecord.model.Patient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

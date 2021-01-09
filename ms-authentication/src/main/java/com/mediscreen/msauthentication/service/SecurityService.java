@@ -5,8 +5,8 @@ import com.mediscreen.msauthentication.exception.NotAllowedException;
 import com.mediscreen.msauthentication.exception.NotFoundException;
 import com.mediscreen.msauthentication.interfaces.SecurityServiceInterface;
 import com.mediscreen.msauthentication.interfaces.JwtServiceInterface;
-import com.mediscreen.msauthentication.models.Jwt;
-import com.mediscreen.msauthentication.models.Login;
+import com.mediscreen.msauthentication.model.Jwt;
+import com.mediscreen.msauthentication.model.Login;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.HashMap;

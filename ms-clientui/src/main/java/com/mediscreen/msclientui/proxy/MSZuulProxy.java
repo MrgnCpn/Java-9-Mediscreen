@@ -1,8 +1,8 @@
 package com.mediscreen.msclientui.proxy;
 
-import com.mediscreen.msclientui.models.Jwt;
-import com.mediscreen.msclientui.models.Login;
-import com.mediscreen.msclientui.models.Patient;
+import com.mediscreen.msclientui.model.Jwt;
+import com.mediscreen.msclientui.model.Login;
+import com.mediscreen.msclientui.model.Patient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
