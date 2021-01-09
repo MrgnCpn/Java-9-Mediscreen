@@ -1,5 +1,6 @@
 package com.mediscreen.mspatientadmin.dao;
 
+import com.mediscreen.mspatientadmin.exception.InternalServerErrorException;
 import com.mediscreen.mspatientadmin.interfaces.DatabaseConfigurationInterface;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -7,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class DaoManager {
     /**
@@ -17,7 +19,7 @@ public class DaoManager {
     /**
      * Database configuration
      */
-    public DatabaseConfigurationInterface databaseConfiguration;
+    protected DatabaseConfigurationInterface databaseConfiguration;
 
     /**
      * Constructor
@@ -48,8 +50,12 @@ public class DaoManager {
             if(rs.next()){
                 result = rs.getInt("max_id");
             }
-        } catch (Exception e){
-            logger.error(this.getClass() + ".getMaxId() -> Error getting max id", e);
+        } catch (ClassNotFoundException e){
+            logger.error("DaoManager.getMaxId() -> Error getting max id : {O}", e);
+            throw new InternalServerErrorException("ClassNotFoundException : " + e);
+        } catch (SQLException e){
+            logger.error("DaoManager.getMaxId() -> Error getting max id : {O}", e);
+            throw new InternalServerErrorException("SQLException : " + e);
         } finally {
             databaseConfiguration.closeSQLTransaction(con, ps, rs);
         }
@@ -76,8 +82,12 @@ public class DaoManager {
             ps.setInt(1, id);
             ps.execute();
             logger.info(this.getClass() + ".deleteById() -> Record delete with id : " + id);
-        } catch (Exception ex){
-            logger.error(this.getClass() + ".deleteById() -> Error delete", ex);
+        } catch (ClassNotFoundException e){
+            logger.error("DaoManager.deleteById() -> Error delete : {O}", e);
+            throw new InternalServerErrorException("ClassNotFoundException : " + e);
+        } catch (SQLException e){
+            logger.error("DaoManager.deleteById() -> Error delete : {O}", e);
+            throw new InternalServerErrorException("SQLException : " + e);
         } finally {
             databaseConfiguration.closeSQLTransaction(con, ps, null);
         }

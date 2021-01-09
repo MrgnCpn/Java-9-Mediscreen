@@ -9,7 +9,7 @@ DROP DATABASE IF EXISTS mediscreen_patientadmin_oc_mc;
 
 -- CREATE Tables
     -- Users Table
-        CREATE TABLE PATIENT (
+        CREATE TABLE patient (
             id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
             firstname VARCHAR(60),
             lastname VARCHAR(60),
@@ -24,9 +24,9 @@ DROP DATABASE IF EXISTS mediscreen_patientadmin_oc_mc;
         AUTO_INCREMENT=0;
 
 -- INSERT data
-    LOCK TABLES PATIENT WRITE;
+    LOCK TABLES patient WRITE;
 
-    INSERT INTO PATIENT(firstname, lastname, sexe, birthday, address, email, phone, country)
+    INSERT INTO patient(firstname, lastname, sexe, birthday, address, email, phone, country)
     VALUES
         ('juanita', 'emard', 'F', '1995-01-06', '1 Brookside St', 'juanita.emard@email.com', '100-222-3333', 'France'),
         ('alexane', 'collins', 'F', '1989-11-22', '2 High St','alexane.collins@email.com', '200-333-4444', 'United Kingdom of Great Britain and Northern Ireland'),
