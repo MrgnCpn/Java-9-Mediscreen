@@ -5,6 +5,7 @@ import com.mediscreen.msmedicalrecord.interfaces.MedicalRecordDaoInterface;
 import com.mediscreen.msmedicalrecord.interfaces.MedicalRecordServiceInterface;
 import com.mediscreen.msmedicalrecord.model.MedicalRecord;
 import com.mediscreen.msmedicalrecord.proxy.MSZuulProxy;
+import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,12 +55,10 @@ public class MedicalRecordService implements MedicalRecordServiceInterface {
     @Override
     public MedicalRecord createMedicalRecord(String token, MedicalRecord medicalRecord){
         if (
-            medicalRecord.getId() != null &&
-            medicalRecord.getId() > 0 &&
             medicalRecord.getPatientId() != null &&
             medicalRecord.getPatientId() > 0
         ) {
-            if (msZuulProxy.msPatientAdmin_getPatient(token, medicalRecord.getId()) == null) throw new NotFoundException("Unknown patient with id : " + medicalRecord.getId());
+            if (msZuulProxy.msPatientAdmin_getPatient(token, medicalRecord.getPatientId()) == null) throw new NotFoundException("Unknown patient with id : " + medicalRecord.getId());
             return medicalRecordDao.createMedicalRecord(medicalRecord);
         }
         return null;
@@ -71,12 +70,11 @@ public class MedicalRecordService implements MedicalRecordServiceInterface {
     @Override
     public MedicalRecord updateMedicalRecord(String token, MedicalRecord medicalRecord) {
         if (
-            medicalRecord.getId() != null &&
-            medicalRecord.getId() > 0 &&
+            !StringUtils.isBlank(medicalRecord.getId()) &&
             medicalRecord.getPatientId() != null &&
             medicalRecord.getPatientId() > 0
         ) {
-            if (msZuulProxy.msPatientAdmin_getPatient(token, medicalRecord.getId()) == null) throw new NotFoundException("Unknown patient with id : " + medicalRecord.getId());
+            if (msZuulProxy.msPatientAdmin_getPatient(token, medicalRecord.getPatientId()) == null) throw new NotFoundException("Unknown patient with id : " + medicalRecord.getId());
             return medicalRecordDao.updateMedicalRecord(medicalRecord);
         }
         return null;
