@@ -16,7 +16,18 @@ public class SecurityService implements SecurityServiceInterface {
     @Autowired
     private MSZuulProxy msZuulProxy;
 
+    /**
+     * Constructor
+     */
     public SecurityService() {
+    }
+
+    /**
+     * Constructor
+     * @param msZuulProxy
+     */
+    public SecurityService(MSZuulProxy msZuulProxy) {
+        this.msZuulProxy = msZuulProxy;
     }
 
     /**

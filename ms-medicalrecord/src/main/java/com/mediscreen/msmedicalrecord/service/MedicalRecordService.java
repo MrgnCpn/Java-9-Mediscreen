@@ -38,6 +38,16 @@ public class MedicalRecordService implements MedicalRecordServiceInterface {
     }
 
     /**
+     * Constructor
+     * @param medicalRecordDao
+     * @param msZuulProxy
+     */
+    public MedicalRecordService(MedicalRecordDaoInterface medicalRecordDao, MSZuulProxy msZuulProxy) {
+        this.medicalRecordDao = medicalRecordDao;
+        this.msZuulProxy = msZuulProxy;
+    }
+
+    /**
      * @see MedicalRecordServiceInterface {@link #getPatientMedicalRecords(String, Integer)}
      */
     @Override
