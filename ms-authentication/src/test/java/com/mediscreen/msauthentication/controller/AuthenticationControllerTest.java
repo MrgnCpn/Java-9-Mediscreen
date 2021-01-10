@@ -16,7 +16,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 @WebMvcTest
 @RunWith(SpringRunner.class)
 @ComponentScan({"com.mediscreen.msauthentication.configuration", "com.mediscreen.msauthentication.controller"})
@@ -30,16 +29,17 @@ class AuthenticationControllerTest {
     @Tag("AuthenticationControllerTest")
     @Test
     void GET_validateTokenTest() throws Exception {
-        mockMvc.perform(get("/validate-token"))
+        String url = "/validate-token";
+        mockMvc.perform(get(url))
                 .andExpect(status().is4xxClientError());
 
-        mockMvc.perform(get("/validate-token?token=token"))
+        mockMvc.perform(get(url + "?token=token"))
                 .andExpect(status().is4xxClientError());
 
-        mockMvc.perform(get("/validate-token?token=" + wrongToken))
+        mockMvc.perform(get(url + "?token=" + wrongToken))
                 .andExpect(status().is4xxClientError());
 
-        mockMvc.perform(get("/validate-token?token=" + token))
+        mockMvc.perform(get(url + "?token=" + token))
                 .andExpect(status().is2xxSuccessful());
     }
 
