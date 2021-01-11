@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Patient {
     private Integer id;
@@ -32,7 +33,22 @@ public class Patient {
 
     private String country;
 
-    public Patient(Integer id, String firstname, String lastname, String sexe, LocalDate birthday, String address, String email, String phone, String country) {
+    private List<MedicalRecord> medicalRecordList;
+
+    /**
+     * Constructor
+     * @param id
+     * @param firstname
+     * @param lastname
+     * @param sexe
+     * @param birthday
+     * @param address
+     * @param email
+     * @param phone
+     * @param country
+     * @param medicalRecordList
+     */
+    public Patient(Integer id, String firstname, String lastname, String sexe, LocalDate birthday, String address, String email, String phone, String country, List<MedicalRecord> medicalRecordList) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -42,6 +58,7 @@ public class Patient {
         this.email = email;
         this.phone = phone;
         this.country = country;
+        this.medicalRecordList = medicalRecordList;
     }
 
     public Patient() {
@@ -117,6 +134,14 @@ public class Patient {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public List<MedicalRecord> getMedicalRecordList() {
+        return medicalRecordList;
+    }
+
+    public void setMedicalRecordList(List<MedicalRecord> medicalRecordList) {
+        this.medicalRecordList = medicalRecordList;
     }
 
     public String getProfilePictureExt(){

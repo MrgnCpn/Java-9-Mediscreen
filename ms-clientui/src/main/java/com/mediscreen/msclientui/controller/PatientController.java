@@ -2,6 +2,7 @@ package com.mediscreen.msclientui.controller;
 
 import com.mediscreen.msclientui.interfaces.PatientServiceInterface;
 import com.mediscreen.msclientui.interfaces.SecurityServiceInterface;
+import com.mediscreen.msclientui.model.MedicalRecord;
 import com.mediscreen.msclientui.model.Patient;
 import com.mediscreen.msclientui.utils.ControllerUtils;
 import org.apache.commons.lang.StringUtils;
@@ -55,6 +56,7 @@ public class PatientController {
         ModelMap model = new ModelMap();
         model.addAttribute("page", "patient-sheet");
         model.addAttribute("patient", patientService.getPatient(session, id));
+        model.addAttribute("medicalRecord", new MedicalRecord());
         if (!StringUtils.isBlank(error)) model.addAttribute("error", error);
         model.addAttribute("isLogin", true);
 

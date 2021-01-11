@@ -2,6 +2,7 @@ package com.mediscreen.msclientui.service;
 
 import com.mediscreen.msclientui.exception.NotAllowedException;
 import com.mediscreen.msclientui.exception.NotFoundException;
+import com.mediscreen.msclientui.interfaces.MedicalRecordServiceInterface;
 import com.mediscreen.msclientui.interfaces.PatientServiceInterface;
 import com.mediscreen.msclientui.interfaces.SecurityServiceInterface;
 import com.mediscreen.msclientui.model.Patient;
@@ -25,6 +26,9 @@ public class PatientService implements PatientServiceInterface {
      */
     @Autowired
     private SecurityServiceInterface securityService;
+
+    @Autowired
+    private MedicalRecordServiceInterface medicalRecordService;
 
     /**
      * @see PatientServiceInterface {@link #getAllPatients(HttpSession)}
@@ -51,7 +55,9 @@ public class PatientService implements PatientServiceInterface {
      */
     @Override
     public Patient getPatient(HttpSession session, int id) {
-        return msZuulProxy.msPatientAdmin_getPatient((String) session.getAttribute("token"), id);
+        Patient patient = msZuulProxy.msPatientAdmin_getPatient((String) session.getAttribute("token"), id);
+        patient.setMedicalRecordList(medicalRecordService.getAllPatientMedicalRecords(session, id));
+        return patient;
     }
 
     /**
