@@ -1,11 +1,13 @@
 package com.mediscreen.msmedicalrecord.dao;
 
+import com.mediscreen.msmedicalrecord.exception.NotFoundException;
 import com.mediscreen.msmedicalrecord.interfaces.DatabaseConfigurationInterface;
 import com.mediscreen.msmedicalrecord.interfaces.MedicalRecordDaoInterface;
 import com.mediscreen.msmedicalrecord.model.MedicalRecord;
 import com.mongodb.*;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Sorts;
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -70,10 +72,10 @@ public class MedicalRecordDao implements MedicalRecordDaoInterface {
         return new MedicalRecord(
                 jsonObject.getJSONObject("_id").getString("$oid"),
                 jsonObject.getInt("patientId"),
-                jsonObject.getString("doctorName"),
+                (String) jsonObject.get("doctorName"),
                 LocalDateTime.parse(jsonObject.getString("createDate"), this.dateFormatter),
                 (!StringUtils.isBlank(jsonObject.getString("lastChangeDate"))) ? LocalDateTime.parse(jsonObject.getString("lastChangeDate"), this.dateFormatter) : null,
-                jsonObject.getString("content"),
+                (String) jsonObject.get("content"),
                 jsonObject.getBoolean("isActive")
         );
     }
@@ -87,7 +89,7 @@ public class MedicalRecordDao implements MedicalRecordDaoInterface {
 
         MongoCollection<Document> collection = this.getMedicalRecordsCollection();
 
-        for (Document document : collection.find(eq("patientId", patientId))) {
+        for (Document document : collection.find(eq("patientId", patientId)).sort(Sorts.descending("createDate"))) {
             if (result == null) { result = new ArrayList<>(); }
             result.add(parseJsonToMedicalRecord(new JSONObject(document.toJson())));
         }
@@ -126,6 +128,10 @@ public class MedicalRecordDao implements MedicalRecordDaoInterface {
     @Override
     public MedicalRecord updateMedicalRecord(MedicalRecord medicalRecord){
         MongoCollection<Document> collection = this.getMedicalRecordsCollection();
+
+        if(!collection.find(eq("_id", new ObjectId(medicalRecord.getId()))).cursor().hasNext()) {
+            throw new NotFoundException("Unknown medical record with id : " + medicalRecord.getId());
+        }
 
         collection.updateOne(
                 eq("_id", new ObjectId(medicalRecord.getId())),

@@ -25,8 +25,10 @@ public interface MedicalRecordServiceInterface {
     /**
      * Update Medical record
      * @param session
-     * @param medicalRecord
+     * @param id
+     * @param patientId
+     * @param active
      * @return
      */
-    MedicalRecord updateMedicalRecord(HttpSession session, MedicalRecord medicalRecord);
+    MedicalRecord updateMedicalRecord(HttpSession session, String id, Integer patientId, Boolean active);
 }

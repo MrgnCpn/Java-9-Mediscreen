@@ -43,11 +43,7 @@ public class PatientService implements PatientServiceInterface {
      */
     @Override
     public List<Patient> searchPatient(HttpSession session, String search) {
-        if (!StringUtils.isBlank(search)) {
-            return msZuulProxy.searchPatients((String) session.getAttribute("token"), search);
-        } else {
-            return null;
-        }
+        return msZuulProxy.searchPatients((String) session.getAttribute("token"), search);
     }
 
     /**

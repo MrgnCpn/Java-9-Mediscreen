@@ -4,6 +4,7 @@ import com.mediscreen.msmedicalrecord.exception.NotFoundException;
 import com.mediscreen.msmedicalrecord.interfaces.MedicalRecordDaoInterface;
 import com.mediscreen.msmedicalrecord.interfaces.MedicalRecordServiceInterface;
 import com.mediscreen.msmedicalrecord.model.MedicalRecord;
+import com.mediscreen.msmedicalrecord.model.Patient;
 import com.mediscreen.msmedicalrecord.proxy.MSZuulProxy;
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;

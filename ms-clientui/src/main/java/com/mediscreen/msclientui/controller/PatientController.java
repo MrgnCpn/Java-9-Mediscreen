@@ -56,7 +56,6 @@ public class PatientController {
         ModelMap model = new ModelMap();
         model.addAttribute("page", "patient-sheet");
         model.addAttribute("patient", patientService.getPatient(session, id));
-        model.addAttribute("medicalRecord", new MedicalRecord());
         if (!StringUtils.isBlank(error)) model.addAttribute("error", error);
         model.addAttribute("isLogin", true);
 

@@ -1,6 +1,6 @@
 package com.mediscreen.msmedicalrecord.controller;
 
-import com.mediscreen.msmedicalrecord.exception.NotFoundException;
+import com.mediscreen.msmedicalrecord.exception.NoContent;
 import com.mediscreen.msmedicalrecord.interfaces.MedicalRecordServiceInterface;
 import com.mediscreen.msmedicalrecord.interfaces.SecurityServiceInterface;
 import com.mediscreen.msmedicalrecord.model.MedicalRecord;
@@ -24,7 +24,7 @@ public class MedicalRecordController {
     public List<MedicalRecord> getAllPatientMedicalRecords(@RequestHeader("token") String token, @PathVariable int id) {
         securityService.authenticationCheck(token);
         List<MedicalRecord> medicalRecordList = medicalRecordService.getPatientMedicalRecords(token, id);
-        if(medicalRecordList == null || medicalRecordList.size() == 0) throw new NotFoundException("No data found");
+        if(medicalRecordList == null || medicalRecordList.size() == 0) throw new NoContent("No data found");
         return medicalRecordList;
     }
 
