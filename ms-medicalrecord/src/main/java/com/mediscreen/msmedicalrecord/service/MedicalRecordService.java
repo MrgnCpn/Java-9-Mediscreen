@@ -15,7 +15,7 @@ import java.util.List;
 
 public class MedicalRecordService implements MedicalRecordServiceInterface {
     /**
-     * Logger log4j2
+     * Logger
      */
     private final Logger logger = LogManager.getLogger(this.getClass());
 

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class MedicalRecordController {
@@ -26,6 +27,18 @@ public class MedicalRecordController {
         List<MedicalRecord> medicalRecordList = medicalRecordService.getPatientMedicalRecords(token, id);
         if(medicalRecordList == null || medicalRecordList.size() == 0) throw new NoContent("No data found");
         return medicalRecordList;
+    }
+
+    @PostMapping("/patHistory/add")
+    public ResponseEntity<MedicalRecord> addMedicalRecord(@RequestHeader("token") String token, @RequestParam(required = true) Map<String, Object> body){
+        securityService.authenticationCheck(token);
+        MedicalRecord medicalRecord = new MedicalRecord();
+        medicalRecord.setPatientId(Integer.valueOf((String) body.get("patId")));
+        medicalRecord.setContent((String) body.get("e"));
+        medicalRecord.setActive(true);
+        MedicalRecord newMedicalRecord = medicalRecordService.createMedicalRecord(token, medicalRecord);
+        if (newMedicalRecord == null) return ResponseEntity.noContent().build();
+        return new ResponseEntity<>(newMedicalRecord, HttpStatus.CREATED);
     }
 
     @PostMapping("/medical-record/create")

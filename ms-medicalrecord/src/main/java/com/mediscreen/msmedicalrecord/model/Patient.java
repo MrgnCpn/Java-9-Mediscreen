@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 public class Patient {
     private Integer id;

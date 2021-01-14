@@ -39,6 +39,7 @@ public interface MSZuulProxy {
     @DeleteMapping("/ms-patientadmin/patient/delete/{id}")
     ResponseEntity<Void> msPatientAdmin_deletePatient(@RequestHeader("token") String token, @PathVariable int id);
 
+    // ms-medicalrecord
     @GetMapping("/ms-medicalrecord/medical-record/getAll/{id}")
     List<MedicalRecord> msMedicalRecord_getAllPatientMedicalRecords(@RequestHeader("token") String token, @PathVariable int id);
 

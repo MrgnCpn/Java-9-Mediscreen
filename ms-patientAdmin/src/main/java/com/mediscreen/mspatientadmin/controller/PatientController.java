@@ -10,7 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class PatientController {
@@ -43,6 +46,22 @@ public class PatientController {
         Patient patient = patientService.getPatientById(id);
         if (patient == null) throw new NotFoundException("Unknown patient with id : " + id);
         return patient;
+    }
+
+    @PostMapping("/patient/add")
+    public ResponseEntity<Patient> addPatient(@RequestHeader("token") String token, @RequestParam(required = true) Map<String, Object> body){
+        securityService.authenticationCheck(token);
+        Patient patient = new Patient();
+        patient.setFirstname((String) body.get("family"));
+        patient.setLastname((String) body.get("given"));
+        patient.setSexe((String) body.get("sex"));
+        patient.setAddress((String) body.get("address"));
+        patient.setPhone((String) body.get("phone"));
+        patient.setBirthday(LocalDate.parse((String) body.get("dob"), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+
+        Patient newPatient = patientService.createPatient(patient);
+        if (newPatient == null) return ResponseEntity.noContent().build();
+        return new ResponseEntity<>(newPatient, HttpStatus.CREATED);
     }
 
     @PostMapping("/patient/create")
