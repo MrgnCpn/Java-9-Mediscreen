@@ -1,9 +1,6 @@
 package com.mediscreen.msclientui.proxy;
 
-import com.mediscreen.msclientui.model.Jwt;
-import com.mediscreen.msclientui.model.Login;
-import com.mediscreen.msclientui.model.MedicalRecord;
-import com.mediscreen.msclientui.model.Patient;
+import com.mediscreen.msclientui.model.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,4 +45,8 @@ public interface MSZuulProxy {
 
     @PutMapping("/ms-medicalrecord//medical-record/update")
     ResponseEntity<MedicalRecord> msMedicalRecords_updateMedicalRecord(@RequestHeader("token") String token, @Valid @RequestBody MedicalRecord medicalRecord);
+
+    // ms-medicalreport
+    @GetMapping("/ms-medicalreport/medical-report/generate-report/{id}")
+    MedicalReport msMedicalReport_generateMedicalReport(@RequestHeader("token") String token, @PathVariable int id);
 }

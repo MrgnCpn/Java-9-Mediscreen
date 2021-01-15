@@ -5,6 +5,8 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Patient {
@@ -34,6 +36,8 @@ public class Patient {
     private String country;
 
     private List<MedicalRecord> medicalRecordList;
+
+    private MedicalReport medicalReport;
 
     /**
      * Constructor
@@ -141,7 +145,27 @@ public class Patient {
     }
 
     public void setMedicalRecordList(List<MedicalRecord> medicalRecordList) {
-        this.medicalRecordList = medicalRecordList;
+        if (medicalRecordList == null) {
+            this.medicalRecordList = new ArrayList<>();
+        } else {
+            this.medicalRecordList = medicalRecordList;
+        }
+    }
+
+    public MedicalReport getMedicalReport() {
+        return medicalReport;
+    }
+
+    public void setMedicalReport(MedicalReport medicalReport) {
+        this.medicalReport = medicalReport;
+    }
+
+    public Integer getAge(){
+        if (this.getBirthday() != null) {
+            return Period.between(this.getBirthday(), LocalDate.now()).getYears();
+        } else {
+            return 0;
+        }
     }
 
     public String getProfilePictureExt(){

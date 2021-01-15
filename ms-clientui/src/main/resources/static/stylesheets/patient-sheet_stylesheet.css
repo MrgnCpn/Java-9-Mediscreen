@@ -152,3 +152,31 @@
         right: -80px;
         transform: translateY(-50%);
     }
+
+    /* REPORT */
+    #patient-sheet-report .report {
+        margin-top: 30px;
+        width: 450px;
+        padding: 20px;
+        border-width: 2px;
+        border-radius: 10px;
+        border-style: solid;
+    }
+
+    #patient-sheet-report .report .report_line {
+        margin-bottom: 20px;
+    }
+
+    #patient-sheet-report .report .report_line .report_line_label {
+        font-size: 10px;
+        margin-right: 10px;
+    }
+
+    #patient-sheet-report .report .report_result_value {
+        margin: 20px auto 0 auto;
+        border-width: 2px;
+        border-radius: 5px;
+        border-style: solid;
+        padding: 5px 25px;
+        font-size: 13px;
+    }

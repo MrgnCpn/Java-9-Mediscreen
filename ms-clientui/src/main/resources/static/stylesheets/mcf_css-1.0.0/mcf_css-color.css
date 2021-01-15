@@ -6,6 +6,7 @@
     --color_green: #19A419;
     --color_blue: #0080FF;
     --color_red: #CC0000;
+    --color_orange: #FFA500;
     --color_yellow: #FFD700;
     --color_purple: #9812AC;
     --color_grey1E: #1E1E1E;
@@ -22,6 +23,7 @@
     .color_white { color: var(--color_white); }
     .color_black { color: var(--color_black); }
     .color_red { color: var(--color_red); }
+    .color_orange { color: var(--color_orange); }
     .color_yellow { color: var(--color_yellow); }
     .color_blue { color: var(--color_blue); }
     .color_green { color: var(--color_green); }
@@ -39,6 +41,7 @@
     .bck_white { background: var(--color_white); }
     .bck_black { background: var(--color_black); }
     .bck_red { background: var(--color_red); }
+    .bck_orange { background: var(--color_orange); }
     .bck_yellow { background: var(--color_yellow); }
     .bck_blue { background: var(--color_blue); }
     .bck_green { background: var(--color_green); }
@@ -56,6 +59,7 @@
     .brd_white { border-color: var(--color_white); }
     .brd_black { border-color: var(--color_black); }
     .brd_red { border-color: var(--color_red); }
+    .brd_orange { border-color: var(--color_orange); }
     .brd_yellow { border-color: var(--color_yellow); }
     .brd_blue { border-color: var(--color_blue); }
     .brd_green { border-color: var(--color_green); }
@@ -73,6 +77,7 @@
     .strk_white { stroke: var(--color_white); }
     .strk_black { stroke: var(--color_black); }
     .strk_red { stroke: var(--color_red); }
+    .strk_orange { stroke: var(--color_orange); }
     .strk_yellow { stroke: var(--color_yellow); }
     .strk_blue { stroke: var(--color_blue); }
     .strk_green { stroke: var(--color_green); }

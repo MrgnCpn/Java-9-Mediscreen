@@ -21,8 +21,21 @@ public class MedicalRecordService implements MedicalRecordServiceInterface {
     /**
      * Security service
      */
-    @Autowired
     private SecurityServiceInterface securityService;
+
+    /**
+     * Constructor
+     * @param securityService
+     */
+    public MedicalRecordService(SecurityServiceInterface securityService) {
+        this.securityService = securityService;
+    }
+
+    /**
+     * Constructor
+     */
+    public MedicalRecordService() {
+    }
 
     /**
      * @see MedicalRecordServiceInterface {@link #getAllPatientMedicalRecords(HttpSession, int)}

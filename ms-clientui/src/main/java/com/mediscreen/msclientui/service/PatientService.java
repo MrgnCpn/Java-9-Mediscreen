@@ -3,6 +3,7 @@ package com.mediscreen.msclientui.service;
 import com.mediscreen.msclientui.exception.NotAllowedException;
 import com.mediscreen.msclientui.exception.NotFoundException;
 import com.mediscreen.msclientui.interfaces.MedicalRecordServiceInterface;
+import com.mediscreen.msclientui.interfaces.MedicalReportServiceInterface;
 import com.mediscreen.msclientui.interfaces.PatientServiceInterface;
 import com.mediscreen.msclientui.interfaces.SecurityServiceInterface;
 import com.mediscreen.msclientui.model.Patient;
@@ -24,11 +25,34 @@ public class PatientService implements PatientServiceInterface {
     /**
      * Security service
      */
-    @Autowired
     private SecurityServiceInterface securityService;
 
-    @Autowired
+    /**
+     * MedicalRecordService
+     */
     private MedicalRecordServiceInterface medicalRecordService;
+    /**
+     * MedicalReportService
+     */
+    private MedicalReportServiceInterface medicalReportService;
+
+    /**
+     * Constructor
+     * @param securityService
+     * @param medicalRecordService
+     * @param medicalReportService
+     */
+    public PatientService(SecurityServiceInterface securityService, MedicalRecordServiceInterface medicalRecordService, MedicalReportServiceInterface medicalReportService) {
+        this.securityService = securityService;
+        this.medicalRecordService = medicalRecordService;
+        this.medicalReportService = medicalReportService;
+    }
+
+    /**
+     * Constructor
+     */
+    public PatientService() {
+    }
 
     /**
      * @see PatientServiceInterface {@link #getAllPatients(HttpSession)}
@@ -52,7 +76,8 @@ public class PatientService implements PatientServiceInterface {
     @Override
     public Patient getPatient(HttpSession session, int id) {
         Patient patient = msZuulProxy.msPatientAdmin_getPatient((String) session.getAttribute("token"), id);
-        patient.setMedicalRecordList(medicalRecordService.getAllPatientMedicalRecords(session, id));
+        patient.setMedicalRecordList(medicalRecordService.getAllPatientMedicalRecords(session, patient.getId()));
+        patient.setMedicalReport(medicalReportService.getMedicalReport(session, patient.getId()));
         return patient;
     }
 
