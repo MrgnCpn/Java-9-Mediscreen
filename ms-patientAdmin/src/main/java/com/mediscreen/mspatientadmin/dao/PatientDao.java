@@ -60,7 +60,7 @@ public class PatientDao extends DaoManager implements PatientDaoInterface {
         }
 
         if (result != null) {
-            super.logger.error("PatientDao.getPatientById() -> Profile get for patient : " + id);
+            super.logger.info("PatientDao.getPatientById() -> Profile get for patient : " + id);
         } else {
             super.logger.info("PatientDao.getPatientById() -> No patient profile for id : " + id);
         }

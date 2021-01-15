@@ -52,8 +52,8 @@ public class PatientController {
     public ResponseEntity<Patient> addPatient(@RequestHeader("token") String token, @RequestParam(required = true) Map<String, Object> body){
         securityService.authenticationCheck(token);
         Patient patient = new Patient();
-        patient.setFirstname((String) body.get("family"));
-        patient.setLastname((String) body.get("given"));
+        patient.setFirstname((String) body.get("given"));
+        patient.setLastname((String) body.get("family"));
         patient.setSexe((String) body.get("sex"));
         patient.setAddress((String) body.get("address"));
         patient.setPhone((String) body.get("phone"));
