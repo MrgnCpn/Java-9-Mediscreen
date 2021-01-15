@@ -67,8 +67,10 @@ public class MedicalReportService implements MedicalReportServiceInterface {
         Patient patient = null;
         if (!StringUtils.isBlank(name)) {
             List<Patient> patientList = msZuulProxy.msPatientAdmin_getAllPatients(token);
-            for (Patient p : patientList) {
-                if (p.getFirstname().equals(name)) patient = p;
+            if ((patientList != null) && (patientList.size() > 0)) {
+                for (Patient p : patientList) {
+                    if (p.getLastname().equalsIgnoreCase(name)) patient = p;
+                }
             }
             if (patient == null) throw new NotFoundException("Unknown patient with name : " + name);
         }
@@ -90,79 +92,93 @@ public class MedicalReportService implements MedicalReportServiceInterface {
     }
 
     /**
+     * Count médical trigger from medical records list
+     * @param medicalRecordList
+     * @return
+     */
+    public Integer countTrigger(List<MedicalRecord> medicalRecordList){
+        Integer triggerCount = 0;
+        List<String> triggerList = new ArrayList<>();
+        triggerList.add("h[eé]moglobine A1C");
+        triggerList.add("microalbumine");
+        triggerList.add("taille");
+        triggerList.add("poids");
+        triggerList.add("fumeur");
+        triggerList.add("anormal");
+        triggerList.add("cholest[eé]rol");
+        triggerList.add("vertige");
+        triggerList.add("rechute");
+        triggerList.add("reaction");
+        triggerList.add("anticorps");
+
+        if (medicalRecordList != null && medicalRecordList.size() > 0) {
+            for (MedicalRecord medicalRecord : medicalRecordList) {
+                for (String str : triggerList) {
+                    if (medicalRecord.isActive() && medicalRecord.getContent().matches("(?i:.*" + str + ".*)")) triggerCount++;
+                }
+            }
+        }
+        return triggerCount;
+    }
+
+    /**
      * @see MedicalReportServiceInterface {@link #generateReport(String, Integer, String)}
      */
     @Override
     public MedicalReport generateReport(String token, Integer id, String name){
-        if(id == null || StringUtils.isBlank(name)) throw new EmptyDataException("MedicalReportService : id or name are mandatory");
+        if(
+                StringUtils.isBlank(token) ||
+                (name == null && (id == null || id < 1)) ||
+                (id == null && StringUtils.isBlank(name))
+        ){
+            throw new EmptyDataException("MedicalReportService : id or name and token are mandatory");
+        }
 
         MedicalReport medicalReport = null;
         Patient patient = (id != null) ? this.getPatientProfileById(token, id) : this.getPatientProfileByName(token, name);
         if (patient != null) {
-            List<MedicalRecord> medicalRecordList = this.getMedicalRecordList(token, id);
+            Integer triggerCount = this.countTrigger(this.getMedicalRecordList(token, id));
 
-            if (medicalRecordList != null && medicalRecordList.size() > 0) {
-                Integer triggerCount = 0;
-                List<String> triggerList = new ArrayList<>();
-                triggerList.add("hemoglobine A1C");
-                triggerList.add("microalbumine");
-                triggerList.add("taille");
-                triggerList.add("poids");
-                triggerList.add("fumeur");
-                triggerList.add("anormal");
-                triggerList.add("cholesterol");
-                triggerList.add("vertige");
-                triggerList.add("rechute");
-                triggerList.add("reaction");
-                triggerList.add("anticorps");
+            medicalReport = new MedicalReport();
+            medicalReport.setPatientId(patient.getId());
+            medicalReport.setDate(LocalDateTime.now());
+            medicalReport.setResult(null);
 
-                for (MedicalRecord medicalRecord : medicalRecordList) {
-                    for (String str : triggerList) {
-                        if (medicalRecord.getContent().matches("(?iUa:.*" + str + ".*)")) triggerCount++;
-                    }
-                }
-
-                medicalReport = new MedicalReport();
-                medicalReport.setPatientId(patient.getId());
-                medicalReport.setDate(LocalDateTime.now());
-                medicalReport.setResult(null);
-
-                // BORDERLINE
-                if (triggerCount >= 2 && patient.getAge() >= 30) {
-                    medicalReport.setResult(MedicalReport.ReportResult.BORDERLINE);
-                }
-
-                // IN DANGER
-                if (
-                    (triggerCount >= 3 && patient.getAge() < 30 && patient.getSexe().equals("M")) ||
-                    (triggerCount >= 4 && patient.getAge() < 30 && patient.getSexe().equals("F")) ||
-                    (triggerCount >= 6 && patient.getAge() >= 30)
-                ) {
-                    medicalReport.setResult(MedicalReport.ReportResult.IN_DANGER);
-                }
-
-                // EARLY ONSET
-                if (
-                    (triggerCount >= 5 && patient.getAge() < 30 && patient.getSexe().equals("M")) ||
-                    (triggerCount >= 7 && patient.getAge() < 30 && patient.getSexe().equals("F")) ||
-                    (triggerCount >= 8 && patient.getAge() >= 30)
-                ) {
-                    medicalReport.setResult(MedicalReport.ReportResult.EARLY_ONSET);
-                }
-
-                // NONE
-                if (medicalReport.getResult() == null) {
-                    medicalReport.setResult(MedicalReport.ReportResult.NONE);
-                }
-
-                StringBuffer reportContent = new StringBuffer();
-                reportContent.append("Patient (").append(patient.getId()).append(") : ");
-                if (patient.getFirstname() != null) { reportContent.append(patient.getFirstname()); }
-                if (patient.getLastname() != null) { reportContent.append(patient.getLastname()); }
-                reportContent.append(" (").append(patient.getAge()).append("y)");
-
-                medicalReport.setContent(reportContent.toString());
+            // BORDERLINE
+            if (triggerCount >= 2 && patient.getAge() >= 30) {
+                medicalReport.setResult(MedicalReport.ReportResult.BORDERLINE);
             }
+
+            // IN DANGER
+            if (
+                (triggerCount >= 3 && patient.getAge() < 30 && patient.getSexe().equals("M")) ||
+                (triggerCount >= 4 && patient.getAge() < 30 && patient.getSexe().equals("F")) ||
+                (triggerCount >= 6 && patient.getAge() >= 30)
+            ) {
+                medicalReport.setResult(MedicalReport.ReportResult.IN_DANGER);
+            }
+
+            // EARLY ONSET
+            if (
+                (triggerCount >= 5 && patient.getAge() < 30 && patient.getSexe().equals("M")) ||
+                (triggerCount >= 7 && patient.getAge() < 30 && patient.getSexe().equals("F")) ||
+                (triggerCount >= 8 && patient.getAge() >= 30)
+            ) {
+                medicalReport.setResult(MedicalReport.ReportResult.EARLY_ONSET);
+            }
+
+            // NONE
+            if (medicalReport.getResult() == null) {
+                medicalReport.setResult(MedicalReport.ReportResult.NONE);
+            }
+
+            StringBuffer reportContent = new StringBuffer();
+            reportContent.append("Patient (id : ").append(patient.getId()).append(") : ");
+            if (patient.getFirstname() != null) { reportContent.append(patient.getFirstname()).append(" "); }
+            if (patient.getLastname() != null) { reportContent.append(patient.getLastname()); }
+            reportContent.append(" (").append(patient.getAge()).append("y)");
+
+            medicalReport.setContent(reportContent.toString());
         }
         return medicalReport;
     }
