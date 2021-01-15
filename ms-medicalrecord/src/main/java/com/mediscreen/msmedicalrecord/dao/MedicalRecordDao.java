@@ -51,7 +51,6 @@ public class MedicalRecordDao implements MedicalRecordDaoInterface {
      */
     public MedicalRecordDao(DatabaseConfigurationInterface databaseConfiguration) {
         this.dbConfiguration = databaseConfiguration;
-        this.connexion = dbConfiguration.getConnexion();
     }
 
     /**
@@ -59,6 +58,7 @@ public class MedicalRecordDao implements MedicalRecordDaoInterface {
      * @return
      */
     private MongoCollection<Document> getMedicalRecordsCollection(){
+        this.connexion = dbConfiguration.getConnexion();
         MongoDatabase db = dbConfiguration.getDatabase(this.connexion);
         return dbConfiguration.getCollection(db,"patientsMedicalRecords");
     }
@@ -72,10 +72,10 @@ public class MedicalRecordDao implements MedicalRecordDaoInterface {
         return new MedicalRecord(
                 jsonObject.getJSONObject("_id").getString("$oid"),
                 jsonObject.getInt("patientId"),
-                (String) jsonObject.get("doctorName"),
+                (!jsonObject.isNull("doctorName") && !StringUtils.isBlank(jsonObject.getString("doctorName"))) ? (String) jsonObject.get("doctorName") : null,
                 LocalDateTime.parse(jsonObject.getString("createDate"), this.dateFormatter),
-                (!StringUtils.isBlank(jsonObject.getString("lastChangeDate"))) ? LocalDateTime.parse(jsonObject.getString("lastChangeDate"), this.dateFormatter) : null,
-                (String) jsonObject.get("content"),
+                (!jsonObject.isNull("lastChangeDate") && !StringUtils.isBlank(jsonObject.getString("lastChangeDate"))) ? LocalDateTime.parse(jsonObject.getString("lastChangeDate"), this.dateFormatter) : null,
+                (!jsonObject.isNull("content") && !StringUtils.isBlank(jsonObject.getString("content"))) ? (String) jsonObject.get("content") : null,
                 jsonObject.getBoolean("isActive")
         );
     }
@@ -87,11 +87,15 @@ public class MedicalRecordDao implements MedicalRecordDaoInterface {
     public List<MedicalRecord> getAllPatientMedicalRecords(Integer patientId){
         List<MedicalRecord> result = null;
 
-        MongoCollection<Document> collection = this.getMedicalRecordsCollection();
+        try {
+            MongoCollection<Document> collection = this.getMedicalRecordsCollection();
 
-        for (Document document : collection.find(eq("patientId", patientId)).sort(Sorts.descending("createDate"))) {
-            if (result == null) { result = new ArrayList<>(); }
-            result.add(parseJsonToMedicalRecord(new JSONObject(document.toJson())));
+            for (Document document : collection.find(eq("patientId", patientId)).sort(Sorts.descending("createDate"))) {
+                if (result == null) { result = new ArrayList<>(); }
+                result.add(parseJsonToMedicalRecord(new JSONObject(document.toJson())));
+            }
+        } finally {
+            connexion.close();
         }
         return result;
     }
@@ -101,22 +105,25 @@ public class MedicalRecordDao implements MedicalRecordDaoInterface {
      */
     @Override
     public MedicalRecord createMedicalRecord(MedicalRecord medicalRecord){
-        MongoCollection<Document> collection = this.getMedicalRecordsCollection();
-
-        Document newDocument = new Document("patientId", medicalRecord.getPatientId())
-                .append("doctorName", medicalRecord.getDoctorName())
-                .append("createDate", LocalDateTime.now().format(this.dateFormatter))
-                .append("lastChangeDate", "")
-                .append("content", medicalRecord.getContent())
-                .append("isActive", medicalRecord.isActive());
-
-        collection.insertOne(newDocument);
-
         MedicalRecord result = null;
+        try {
+            MongoCollection<Document> collection = this.getMedicalRecordsCollection();
 
-        for (Document document : collection.find(eq("patientId", medicalRecord.getPatientId()))) {
-            MedicalRecord currentRecord = parseJsonToMedicalRecord(new JSONObject(document.toJson()));
-            result = (result == null || result.getCreateDate().isBefore(currentRecord.getCreateDate())) ? currentRecord : result;
+            Document newDocument = new Document("patientId", medicalRecord.getPatientId())
+                    .append("doctorName", medicalRecord.getDoctorName())
+                    .append("createDate", LocalDateTime.now().format(this.dateFormatter))
+                    .append("lastChangeDate", null)
+                    .append("content", medicalRecord.getContent())
+                    .append("isActive", medicalRecord.isActive());
+
+            collection.insertOne(newDocument);
+
+            for (Document document : collection.find(eq("patientId", medicalRecord.getPatientId()))) {
+                MedicalRecord currentRecord = parseJsonToMedicalRecord(new JSONObject(document.toJson()));
+                result = (result == null || result.getCreateDate().isBefore(currentRecord.getCreateDate())) ? currentRecord : result;
+            }
+        } finally {
+            connexion.close();
         }
 
         return result;
@@ -127,24 +134,26 @@ public class MedicalRecordDao implements MedicalRecordDaoInterface {
      */
     @Override
     public MedicalRecord updateMedicalRecord(MedicalRecord medicalRecord){
-        MongoCollection<Document> collection = this.getMedicalRecordsCollection();
-
-        if(!collection.find(eq("_id", new ObjectId(medicalRecord.getId()))).cursor().hasNext()) {
-            throw new NotFoundException("Unknown medical record with id : " + medicalRecord.getId());
-        }
-
-        collection.updateOne(
-                eq("_id", new ObjectId(medicalRecord.getId())),
-                combine(set("isActive", medicalRecord.isActive()), set("lastChangeDate", LocalDateTime.now().format(this.dateFormatter)))
-        );
-
         MedicalRecord result = null;
+        try {
+            MongoCollection<Document> collection = this.getMedicalRecordsCollection();
 
-        for (Document document : collection.find(eq("_id", new ObjectId(medicalRecord.getId())))) {
-            MedicalRecord currentRecord = parseJsonToMedicalRecord(new JSONObject(document.toJson()));
-            result = (result == null || result.getCreateDate().isBefore(currentRecord.getCreateDate())) ? currentRecord : result;
+            if(!collection.find(eq("_id", new ObjectId(medicalRecord.getId()))).cursor().hasNext()) {
+                throw new NotFoundException("Unknown medical record with id : " + medicalRecord.getId());
+            }
+
+            collection.updateOne(
+                    eq("_id", new ObjectId(medicalRecord.getId())),
+                    combine(set("isActive", medicalRecord.isActive()), set("lastChangeDate", LocalDateTime.now().format(this.dateFormatter)))
+            );
+
+            for (Document document : collection.find(eq("_id", new ObjectId(medicalRecord.getId())))) {
+                MedicalRecord currentRecord = parseJsonToMedicalRecord(new JSONObject(document.toJson()));
+                result = (result == null || result.getCreateDate().isBefore(currentRecord.getCreateDate())) ? currentRecord : result;
+            }
+        } finally {
+            connexion.close();
         }
-
         return result;
     }
 }

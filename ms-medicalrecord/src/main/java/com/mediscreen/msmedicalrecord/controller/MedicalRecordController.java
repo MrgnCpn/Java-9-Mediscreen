@@ -1,6 +1,5 @@
 package com.mediscreen.msmedicalrecord.controller;
 
-import com.mediscreen.msmedicalrecord.exception.NoContent;
 import com.mediscreen.msmedicalrecord.interfaces.MedicalRecordServiceInterface;
 import com.mediscreen.msmedicalrecord.interfaces.SecurityServiceInterface;
 import com.mediscreen.msmedicalrecord.model.MedicalRecord;
@@ -24,9 +23,7 @@ public class MedicalRecordController {
     @GetMapping("/medical-record/getAll/{id}")
     public List<MedicalRecord> getAllPatientMedicalRecords(@RequestHeader("token") String token, @PathVariable int id) {
         securityService.authenticationCheck(token);
-        List<MedicalRecord> medicalRecordList = medicalRecordService.getPatientMedicalRecords(token, id);
-        if(medicalRecordList == null || medicalRecordList.size() == 0) throw new NoContent("No data found");
-        return medicalRecordList;
+        return medicalRecordService.getPatientMedicalRecords(token, id);
     }
 
     @PostMapping("/patHistory/add")
