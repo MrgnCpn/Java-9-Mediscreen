@@ -10,7 +10,7 @@ $(() => {
         e.preventDefault();
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:8080' + $(this).data('url'),
+            url: 'http://localhost:8888' + $(this).data('url'),
             data: { doctorName : $('#doctorName').val(), content : $('#content').val(), active: true},
             success : function(data, status) {
                 let createDateStr = '';
@@ -86,7 +86,7 @@ $(() => {
         let el = $(this);
         $.ajax({
             type: 'GET',
-            url: 'http://localhost:8080/medical-record/update?id=' + el.data('id') + '&patientId=' + el.data('patient') + '&active=' + el.data('active'),
+            url: 'http://localhost:8888/medical-record/update?id=' + el.data('id') + '&patientId=' + el.data('patient') + '&active=' + el.data('active'),
             success : function(data, status) {
                 el.parent().toggleClass('active');
                 let icon = ''

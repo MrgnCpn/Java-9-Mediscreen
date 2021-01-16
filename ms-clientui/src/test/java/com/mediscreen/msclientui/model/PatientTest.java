@@ -81,7 +81,7 @@ class PatientTest {
         patient.setEmail("newEmail");
         patient.setPhone("newPhone");
         patient.setCountry("newCountry");
-        patient.setMedicalRecordList(null);
+        patient.setMedicalRecordList(new ArrayList<>());
 
         assertThat(patient.getId()).isEqualTo(2);
         assertThat(patient.getFirstname()).isEqualTo("newFirstname");
@@ -92,7 +92,7 @@ class PatientTest {
         assertThat(patient.getEmail()).isEqualTo("newEmail");
         assertThat(patient.getPhone()).isEqualTo("newPhone");
         assertThat(patient.getCountry()).isEqualTo("newCountry");
-        assertThat(patient.getMedicalRecordList()).isNull();
+        assertThat(patient.getMedicalRecordList().size()).isEqualTo(0);
     }
 
 }

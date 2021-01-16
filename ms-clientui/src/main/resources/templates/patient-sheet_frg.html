@@ -22,7 +22,7 @@
                     <p class="patient_contact_phone txt_ltr-sp_2 color_grey96" th:text="${patient.getPhone()}"></p>
                 </div>
                 <div class="patient_visits flex flex_column flex_justify_center flex_align_start wdth_25 hght_100">
-                    <p th:if="${patient.medicalRecordList.size() != null && patient.medicalRecordList.size() > 0}" class="txt_captz txt_ltr-sp_2" th:text="'last visit : ' + ${patient.medicalRecordList[0].createDate}"></p>
+                    <p th:if="${patient.medicalRecordList.size() != null && patient.medicalRecordList.size() > 0}" class="txt_captz txt_ltr-sp_2" th:text="'last visit : ' + ${#temporals.format(patient.medicalRecordList[0].createDate, 'dd/MM/yyyy HH:mm:ss')}"></p>
                     <p class="txt_captz txt_ltr-sp_2 opacity_0"></p>
                 </div>
                 <div th:switch="${patient.medicalReport.result.name}" class="patient_reportResume flex flex_row flex_align_center flex_justify_end wdth_20 hght_100">

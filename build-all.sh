@@ -16,3 +16,9 @@ cd ../ms-patientAdmin
 
 cd ../ms-medicalrecord
 ./build.sh
+
+cd ../ms-medicalreport
+./build.sh
+
+cd ../ms-clientui
+./build.sh

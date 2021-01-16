@@ -4,7 +4,7 @@ services:
     mysql_db:
         image: mysql:latest
         volumes:
-            - "./ms-patientAdmin/src/main/resources/static/database/mediscreen_patientAdmin_database.sql:/docker-entrypoint-initdb.d/0_init.sql"
+            - "./docker/mysql/database.sql:/docker-entrypoint-initdb.d/0_init.sql"
         restart: always
         ports:
             - "3306:3306"
@@ -19,19 +19,29 @@ services:
     # MongoDB
     mongo_db:
         image: mongo:latest
+        hostname: mongodb
         volumes:
-            - ./docker-conf/mongodb/mongod.conf:/etc/mongod.conf
-            - ./data/db:/var/micro-data/mongodb/data/db
-        restart: always
+            - ./docker/mongodb/mongod.conf:/etc/mongod.conf
+            - ./docker/mongodb/data/db/:/data/db/
         environment:
             MONGO_INITDB_ROOT_USERNAME: root
             MONGO_INITDB_ROOT_PASSWORD: password
-
         ports:
             - "27017:27017"
-        command: [ "-f", "/etc/mongod.conf" ]
-         networks:
-             - mediscreen-network
+        container_name: mongo_db
+        command: ["-f", "/etc/mongod.conf"]
+        depends_on:
+            - mongo_db_data
+        networks:
+            - mediscreen-network
+
+    # MongoDB - Data
+    mongo_db_data:
+        image: mongo:latest
+        container_name: mongo_db_data
+        volumes:
+            - ./docker/mongodb/init/:/src/data/
+        command: ./src/data/import.sh     
 
     # ems-eureka
     ems-eureka:
