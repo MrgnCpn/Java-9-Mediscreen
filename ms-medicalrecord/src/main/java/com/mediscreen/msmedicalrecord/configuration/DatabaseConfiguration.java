@@ -1,8 +1,7 @@
 package com.mediscreen.msmedicalrecord.configuration;
 
 import com.mediscreen.msmedicalrecord.interfaces.DatabaseConfigurationInterface;
-import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
+import com.mongodb.*;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.apache.commons.lang.StringUtils;
@@ -11,6 +10,8 @@ import org.apache.logging.log4j.Logger;
 import org.bson.Document;
 
 import javax.inject.Singleton;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Database configuration
@@ -75,7 +76,7 @@ public class DatabaseConfiguration implements DatabaseConfigurationInterface {
             logger.error("DatabaseConfiguration.getMongoClient() : Error fetching database properties");
             throw new NullPointerException("DatabaseConfiguration.getMongoClient() : Error fetching database properties");
         }
-        return new MongoClient(this.host, this.port);
+        return new MongoClient(new MongoClientURI("mongodb://" + this.user + ":" + this.password + "@" + this.host + ":" + this.port + "/" + this.database + "?authSource=admin"));
     }
 
     /**

@@ -95,7 +95,7 @@ public class MedicalRecordDao implements MedicalRecordDaoInterface {
                 result.add(parseJsonToMedicalRecord(new JSONObject(document.toJson())));
             }
         } finally {
-            connexion.close();
+            if (connexion != null) connexion.close();
         }
         return result;
     }
@@ -123,7 +123,7 @@ public class MedicalRecordDao implements MedicalRecordDaoInterface {
                 result = (result == null || result.getCreateDate().isBefore(currentRecord.getCreateDate())) ? currentRecord : result;
             }
         } finally {
-            connexion.close();
+            if (connexion != null) connexion.close();
         }
 
         return result;
@@ -152,7 +152,7 @@ public class MedicalRecordDao implements MedicalRecordDaoInterface {
                 result = (result == null || result.getCreateDate().isBefore(currentRecord.getCreateDate())) ? currentRecord : result;
             }
         } finally {
-            connexion.close();
+            if (connexion != null) connexion.close();
         }
         return result;
     }

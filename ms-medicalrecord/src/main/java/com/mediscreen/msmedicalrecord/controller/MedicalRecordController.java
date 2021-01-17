@@ -22,7 +22,7 @@ public class MedicalRecordController {
 
     @GetMapping("/medical-record/getAll/{id}")
     public List<MedicalRecord> getAllPatientMedicalRecords(@RequestHeader("token") String token, @PathVariable int id) {
-        securityService.authenticationCheck(token);
+        //securityService.authenticationCheck(token);
         return medicalRecordService.getPatientMedicalRecords(token, id);
     }
 

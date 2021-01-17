@@ -19,7 +19,7 @@ services:
     # MongoDB
     mongo_db:
         image: mongo:latest
-        hostname: mongodb
+        hostname: mongo_db
         volumes:
             - ./docker/mongodb/mongod.conf:/etc/mongod.conf
             - ./docker/mongodb/data/db/:/data/db/
@@ -30,8 +30,6 @@ services:
             - "27017:27017"
         container_name: mongo_db
         command: ["-f", "/etc/mongod.conf"]
-        depends_on:
-            - mongo_db_data
         networks:
             - mediscreen-network
 
@@ -41,7 +39,11 @@ services:
         container_name: mongo_db_data
         volumes:
             - ./docker/mongodb/init/:/src/data/
-        command: ./src/data/import.sh     
+        command: ./src/data/import.sh 
+        depends_on:
+            - mongo_db
+        networks:
+            - mediscreen-network    
 
     # ems-eureka
     ems-eureka:
