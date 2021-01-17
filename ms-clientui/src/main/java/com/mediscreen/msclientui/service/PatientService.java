@@ -9,6 +9,8 @@ import com.mediscreen.msclientui.interfaces.SecurityServiceInterface;
 import com.mediscreen.msclientui.model.Patient;
 import com.mediscreen.msclientui.proxy.MSZuulProxy;
 import org.apache.commons.lang.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
@@ -16,6 +18,11 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class PatientService implements PatientServiceInterface {
+    /**
+     * Logger log4j2
+     */
+    private final Logger logger = LogManager.getLogger(this.getClass());
+
     /**
      * Zuul proxy
      */
@@ -97,10 +104,19 @@ public class PatientService implements PatientServiceInterface {
      */
     @Override
     public void updatePatient(HttpSession session, Patient patient) {
-        if(!securityService.isLog(session)) throw new NotAllowedException("Permission denied");
-        if(this.getPatient(session, patient.getId()) == null) throw new NotFoundException("Patient id unknown");
+        if(!securityService.isLog(session)) {
+            logger.error("Permission denied");
+            throw new NotAllowedException("Permission denied");
+        }
+        if(this.getPatient(session, patient.getId()) == null) {
+            logger.error("Patient id unknown : " + patient.getId());
+            throw new NotFoundException("Patient id unknown");
+        }
         Patient updatePatient = msZuulProxy.msPatientAdmin_updatePatient((String) session.getAttribute("token"), patient).getBody();
-        if(updatePatient == null) throw new NotFoundException("Patient can't be updated");
+        if(updatePatient == null) {
+            logger.error("Patient can't be updated");
+            throw new NotFoundException("Patient can't be updated");
+        }
     }
 
     /**
@@ -108,8 +124,14 @@ public class PatientService implements PatientServiceInterface {
      */
     @Override
     public HttpStatus deletePatient(HttpSession session, int id) {
-        if(!securityService.isLog(session)) throw new NotAllowedException("Permission denied");
-        if(this.getPatient(session, id) == null) throw new NotFoundException("Patient id unknown");
+        if(!securityService.isLog(session)) {
+            logger.error("Permission denied");
+            throw new NotAllowedException("Permission denied");
+        }
+        if(this.getPatient(session, id) == null) {
+            logger.error("Patient id unknown : " + id);
+            throw new NotFoundException("Patient id unknown");
+        }
         return msZuulProxy.msPatientAdmin_deletePatient((String) session.getAttribute("token"), id).getStatusCode();
     }
 }

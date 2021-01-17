@@ -29,7 +29,7 @@
                         <p class="color_greyCA txt_ltr-sp_2" th:text="${#temporals.format(medRecord.lastChangeDate, 'dd/MM/yyyy HH:mm:ss')}"></p>
                     </div>
                 </div>
-                <p class="visit_content hght_100 wdth_65 txt_ltr-sp_2" th:text="${medRecord.content}"></p>
+                <p class="visit_content hght_100 wdth_65 txt_ltr-sp_2" th:utext="${medRecord.content}"></p>
                 <span th:data-id="${medRecord.getId()}" th:data-patient="${medRecord.getPatientId()}" th:data-active="${!medRecord.isActive()}" class="btn btn_active pos_absolute flex_center">
                     <svg th:if="${medRecord.isActive()}" class="feather strk_red">
                         <use th:href="@{/assets/icons/feather-sprite.svg#x}"/>

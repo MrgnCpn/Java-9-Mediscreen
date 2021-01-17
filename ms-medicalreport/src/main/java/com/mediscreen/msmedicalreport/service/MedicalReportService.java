@@ -52,7 +52,10 @@ public class MedicalReportService implements MedicalReportServiceInterface {
         Patient patient = null;
         if (id != null && id > 0) {
             patient = msZuulProxy.msPatientAdmin_getPatient(token, id);
-            if (patient == null) throw new NotFoundException("Unknown patient with id : " + id);
+            if (patient == null) {
+                logger.error("Unknown patient with id : " + id);
+                throw new NotFoundException("Unknown patient with id : " + id);
+            }
         }
         return patient;
     }
@@ -72,7 +75,10 @@ public class MedicalReportService implements MedicalReportServiceInterface {
                     if (p.getLastname().equalsIgnoreCase(name)) patient = p;
                 }
             }
-            if (patient == null) throw new NotFoundException("Unknown patient with name : " + name);
+            if (patient == null) {
+                logger.error("Unknown patient with name : " + name);
+                throw new NotFoundException("Unknown patient with name : " + name);
+            }
         }
         return patient;
     }
@@ -131,6 +137,7 @@ public class MedicalReportService implements MedicalReportServiceInterface {
                 (name == null && (id == null || id < 1)) ||
                 (id == null && StringUtils.isBlank(name))
         ){
+            logger.error("MedicalReportService : id or name and token are mandatory");
             throw new EmptyDataException("MedicalReportService : id or name and token are mandatory");
         }
 
