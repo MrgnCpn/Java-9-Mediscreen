@@ -4,7 +4,7 @@ services:
     mysql_db:
         image: mysql:latest
         volumes:
-            - "./docker/mysql/database.sql:/docker-entrypoint-initdb.d/0_init.sql"
+            - "./dckr_database/mysql/database.sql:/docker-entrypoint-initdb.d/0_init.sql"
         restart: always
         ports:
             - "3306:3306"
@@ -21,8 +21,8 @@ services:
         image: mongo:latest
         hostname: mongo_db
         volumes:
-            - ./docker/mongodb/mongod.conf:/etc/mongod.conf
-            - ./docker/mongodb/data/db/:/data/db/
+            - ./dckr_database/mongodb/mongod.conf:/etc/mongod.conf
+            - ./dckr_database/mongodb/data/db/:/data/db/
         environment:
             MONGO_INITDB_ROOT_USERNAME: root
             MONGO_INITDB_ROOT_PASSWORD: password
@@ -38,7 +38,7 @@ services:
         image: mongo:latest
         container_name: mongo_db_data
         volumes:
-            - ./docker/mongodb/init/:/src/data/
+            - ./dckr_database/mongodb/init/:/src/data/
         command: ./src/data/import.sh 
         depends_on:
             - mongo_db

@@ -1,0 +1,31 @@
+[
+ 	{
+ 		"patientId" : 1,
+		"doctorName" : "Jefferey Spencer",
+		"createDate" : "08-01-2020 14:34:28",
+		"lastChangeDate" : null,
+		"content" : "Le patient déclare qu'il « se sent très bien »\nPoids égal ou inférieur au poids recommandé",
+		"isActive" : true
+	},
+	{
+ 		"patientId" : 1,
+		"doctorName" : "Jefferey Spencer",
+		"createDate" : "06-08-2020 09:33:17",
+		"lastChangeDate" : null,
+		"content" : "Le patient déclare qu'il se sent fatigué pendant la journée\nIl se plaint également de douleurs musculaires\nTests de laboratoire indiquant une microalbumine élevée",
+		"isActive" : true
+	},
+	{
+ 		"patientId" : 1,
+		"doctorName" : "Jefferey Spencer",
+		"createDate" : "10-11-2020 22:37:03",
+		"lastChangeDate" : null,
+		"content" : "Le patient déclare qu'il ne se sent pas si fatigué que ça\nFumeur, il a arrêté dans les 12 mois précédents\nTests de laboratoire indiquant que les anticorps sont élevés",
+		"isActive" : true
+	}
+]
+
+
+
+
+

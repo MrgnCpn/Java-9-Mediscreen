@@ -1,0 +1,40 @@
+version: '3.3'
+services:
+    # MySQL
+    mysql_db_test:
+        image: mysql:latest
+        volumes:
+            - "./mysql_test/database_test.sql:/docker-entrypoint-initdb.d/0_init.sql"
+        restart: always
+        ports:
+            - "3307:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_USER: user
+            MYSQL_PASSWORD: password
+        container_name: mysql_db_test
+
+    # MongoDB
+    mongo_db_test:
+        image: mongo:latest
+        hostname: mongo_db_test
+        volumes:
+            - ./mongodb_test/mongod.conf:/etc/mongod.conf
+            - ./mongodb_test/data/db/:/data/db/
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: password
+        ports:
+            - "27018:27017"
+        container_name: mongo_db_test
+        command: ["-f", "/etc/mongod.conf"]
+
+    # MongoDB - Data
+    mongo_db_test_data:
+        image: mongo:latest
+        container_name: mongo_db_data
+        volumes:
+            - ./mongodb_test/init/:/src/data/
+        command: ./src/data/import.sh 
+        depends_on:
+            - mongo_db_test

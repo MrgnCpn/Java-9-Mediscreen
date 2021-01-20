@@ -1,10 +1,10 @@
-DROP DATABASE IF EXISTS mediscreen_patientadmin_oc_mc;
+DROP DATABASE IF EXISTS mediscreen_patientadmin_prod_oc_mc;
 
 /** PRODUCTION DB **/
 
 -- CREATE Database
-    CREATE DATABASE IF NOT EXISTS mediscreen_patientadmin_oc_mc;
-    USE mediscreen_patientadmin_oc_mc;
+    CREATE DATABASE IF NOT EXISTS mediscreen_patientadmin_prod_oc_mc;
+    USE mediscreen_patientadmin_prod_oc_mc;
     SET autocommit=1;
 
 -- CREATE Tables
