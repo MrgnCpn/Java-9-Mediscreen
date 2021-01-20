@@ -31,7 +31,7 @@ class PatientDaoTest {
     void init_test(){
         databaseConfiguration = new DatabaseConfiguration(new DBConnection(
                 "localhost",
-                3306,
+                3307,
                 "mediscreen_patientadmin_test_oc_mc",
                 "root",
                 "password"

@@ -1,14 +1,19 @@
-package com.mediscreen.mspatientadmin.configuration;
+package com.mediscreen.msmedicalrecord.model;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
-@ConfigurationProperties("mediscreen-ms-patient-admin-db")
-public class AppProperties {
+public class DBConnection {
     private String host;
     private Integer port;
     private String database;
     private String user;
     private String password;
+
+    public DBConnection(String host, Integer port, String database, String user, String password) {
+        this.host = host;
+        this.port = port;
+        this.database = database;
+        this.user = user;
+        this.password = password;
+    }
 
     public String getHost() {
         return host;

@@ -30,11 +30,11 @@ public class DatabaseConfiguration implements DatabaseConfigurationInterface {
      */
     public DatabaseConfiguration(AppProperties appProperties) {
         this.dbConnection = new DBConnection(
-                appProperties.getHostProd(),
-                appProperties.getPortProd(),
-                appProperties.getDatabaseProd(),
-                appProperties.getUserProd(),
-                appProperties.getPasswordProd()
+                appProperties.getHost(),
+                appProperties.getPort(),
+                appProperties.getDatabase(),
+                appProperties.getUser(),
+                appProperties.getPassword()
         );
     }
 

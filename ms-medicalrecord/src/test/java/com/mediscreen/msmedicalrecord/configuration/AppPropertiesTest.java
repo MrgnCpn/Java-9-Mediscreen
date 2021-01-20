@@ -1,4 +1,4 @@
-package com.mediscreen.mspatientadmin.configuration;
+package com.mediscreen.msmedicalrecord.configuration;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
