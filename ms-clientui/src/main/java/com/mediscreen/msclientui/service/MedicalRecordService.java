@@ -46,6 +46,16 @@ public class MedicalRecordService implements MedicalRecordServiceInterface {
     }
 
     /**
+     * Constructor
+     * @param msZuulProxy
+     * @param securityService
+     */
+    public MedicalRecordService(MSZuulProxy msZuulProxy, SecurityServiceInterface securityService) {
+        this.msZuulProxy = msZuulProxy;
+        this.securityService = securityService;
+    }
+
+    /**
      * @see MedicalRecordServiceInterface {@link #getAllPatientMedicalRecords(HttpSession, int)}
      */
     @Override

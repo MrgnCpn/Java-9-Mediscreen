@@ -1,5 +1,6 @@
 package com.mediscreen.msclientui.service;
 
+import com.mediscreen.msclientui.exception.EmptyDataException;
 import com.mediscreen.msclientui.exception.NotAllowedException;
 import com.mediscreen.msclientui.exception.NotFoundException;
 import com.mediscreen.msclientui.interfaces.MedicalRecordServiceInterface;
@@ -62,10 +63,25 @@ public class PatientService implements PatientServiceInterface {
     }
 
     /**
+     * Constructor
+     * @param msZuulProxy
+     * @param securityService
+     * @param medicalRecordService
+     * @param medicalReportService
+     */
+    public PatientService(MSZuulProxy msZuulProxy, SecurityServiceInterface securityService, MedicalRecordServiceInterface medicalRecordService, MedicalReportServiceInterface medicalReportService) {
+        this.msZuulProxy = msZuulProxy;
+        this.securityService = securityService;
+        this.medicalRecordService = medicalRecordService;
+        this.medicalReportService = medicalReportService;
+    }
+
+    /**
      * @see PatientServiceInterface {@link #getAllPatients(HttpSession)}
      */
     @Override
     public List<Patient> getAllPatients(HttpSession session) {
+        if(!securityService.isLog(session)) throw new NotAllowedException("Permission denied");
         return msZuulProxy.msPatientAdmin_getAllPatients((String) session.getAttribute("token"));
     }
 
@@ -74,17 +90,22 @@ public class PatientService implements PatientServiceInterface {
      */
     @Override
     public List<Patient> searchPatient(HttpSession session, String search) {
+        if(!securityService.isLog(session)) throw new NotAllowedException("Permission denied");
         return msZuulProxy.searchPatients((String) session.getAttribute("token"), search);
     }
 
     /**
-     * @see PatientServiceInterface {@link #getPatient(HttpSession, int)}
+     * @see PatientServiceInterface {@link #getPatient(HttpSession, Integer)}
      */
     @Override
-    public Patient getPatient(HttpSession session, int id) {
+    public Patient getPatient(HttpSession session, Integer id) {
+        if(!securityService.isLog(session)) throw new NotAllowedException("Permission denied");
+        if(id == null || id < 1) throw new EmptyDataException("Id is mandatory");
         Patient patient = msZuulProxy.msPatientAdmin_getPatient((String) session.getAttribute("token"), id);
-        patient.setMedicalRecordList(medicalRecordService.getAllPatientMedicalRecords(session, patient.getId()));
-        patient.setMedicalReport(medicalReportService.getMedicalReport(session, patient.getId()));
+        if(patient != null) {
+            patient.setMedicalRecordList(medicalRecordService.getAllPatientMedicalRecords(session, patient.getId()));
+            patient.setMedicalReport(medicalReportService.getMedicalReport(session, patient.getId()));
+        }
         return patient;
     }
 
@@ -120,14 +141,17 @@ public class PatientService implements PatientServiceInterface {
     }
 
     /**
-     * @see PatientServiceInterface {@link #deletePatient(HttpSession, int)}
+     * @see PatientServiceInterface {@link #deletePatient(HttpSession, Integer)}
      */
     @Override
-    public HttpStatus deletePatient(HttpSession session, int id) {
+    public HttpStatus deletePatient(HttpSession session, Integer id) {
         if(!securityService.isLog(session)) {
             logger.error("Permission denied");
             throw new NotAllowedException("Permission denied");
         }
+
+        if(id == null || id < 1) throw new EmptyDataException("Id is mandatory");
+
         if(this.getPatient(session, id) == null) {
             logger.error("Patient id unknown : " + id);
             throw new NotFoundException("Patient id unknown");

@@ -27,7 +27,18 @@ public class SecurityService implements SecurityServiceInterface {
     @Autowired
     private MSZuulProxy msZuulProxy;
 
+    /**
+     * Constructor
+     */
     public SecurityService() {
+    }
+
+    /**
+     * Constructor
+     * @param msZuulProxy
+     */
+    public SecurityService(MSZuulProxy msZuulProxy) {
+        this.msZuulProxy = msZuulProxy;
     }
 
     /**
@@ -58,14 +69,14 @@ public class SecurityService implements SecurityServiceInterface {
     }
 
     /**
-     * @see SecurityServiceInterface {@link #logUser(Login, HttpSession)}
+     * @see SecurityServiceInterface {@link #logUser(Login)}
      */
     @Override
-    public String logUser(Login login, HttpSession session){
+    public String logUser(Login login){
         if (!StringUtils.isBlank(login.getUsername()) && !StringUtils.isBlank(login.getPassword())) {
             try {
                 ResponseEntity<Jwt> jwt = msZuulProxy.msAuthentication_generateToken(login);
-                if (jwt.getStatusCode().equals(HttpStatus.OK) && jwt.getBody() != null && jwt.getBody().getToken() != null) {
+                if (jwt != null && jwt.getStatusCode().equals(HttpStatus.OK) && jwt.getBody() != null && jwt.getBody().getToken() != null) {
                     return jwt.getBody().getToken();
                 } else {
                     logger.error("JWT no generated");
