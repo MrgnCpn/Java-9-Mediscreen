@@ -32,7 +32,7 @@ services:
     # MongoDB - Data
     mongo_db_test_data:
         image: mongo:latest
-        container_name: mongo_db_data
+        container_name: mongo_db_test_data
         volumes:
             - ./mongodb_test/init/:/src/data/
         command: ./src/data/import.sh 

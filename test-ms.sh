@@ -3,16 +3,16 @@ cd ./dckr_database_test
 docker-compose up -d
 
 cd ../ms-authentication
-mvn clean site
+mvn clean test
 
 cd ../ms-patientAdmin
-mvn clean site
+mvn clean test
 
 cd ../ms-medicalrecord
-mvn clean site
+mvn clean test
 
 cd ../ms-medicalreport
-mvn clean site
+mvn clean test
 
 cd ../ms-clientui
-mvn clean site
+mvn clean test

@@ -17,8 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
@@ -48,7 +47,7 @@ class MedicalReportServiceTest {
     @Test
     void getMedicalReport_test_nullReport(){
         when(securityService.isLog(any(HttpSession.class))).thenReturn(true);
-        when(msZuulProxy.msMedicalReport_generateMedicalReport(anyString(), anyInt())).thenReturn(null);
+        when(msZuulProxy.msMedicalReport_generateMedicalReport(anyObject(), anyInt())).thenReturn(null);
         assertThatExceptionOfType(NotFoundException.class).isThrownBy(() -> medicalReportService.getMedicalReport(JWTTest.session, 0));
     }
 
