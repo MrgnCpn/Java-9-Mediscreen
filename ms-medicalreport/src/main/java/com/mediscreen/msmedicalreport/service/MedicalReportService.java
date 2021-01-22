@@ -119,8 +119,13 @@ public class MedicalReportService implements MedicalReportServiceInterface {
 
         if (medicalRecordList != null && medicalRecordList.size() > 0) {
             for (MedicalRecord medicalRecord : medicalRecordList) {
-                for (String str : triggerList) {
-                    if (medicalRecord.isActive() && medicalRecord.getContent().matches("(?i:.*" + str + ".*)")) triggerCount++;
+                if(medicalRecord.isActive() && !StringUtils.isBlank(medicalRecord.getContent())){
+                    String contentSplit[] = medicalRecord.getContent().split(" ");
+                    for (String str : contentSplit) {
+                        for (String trigger : triggerList) {
+                            if (str.matches("(?i:.*" + trigger + ".*)")) triggerCount++;
+                        }
+                    }
                 }
             }
         }
