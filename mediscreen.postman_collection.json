@@ -1,0 +1,1557 @@
+{
+	"info": {
+		"_postman_id": "e3684128-ba0a-4305-b909-253886984548",
+		"name": "Mediscreen",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ms-patientAdmin",
+			"item": [
+				{
+					"name": "Actuator",
+					"item": [
+						{
+							"name": "ACTUATOR",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/actuator",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"actuator"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - INFO",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/actuator/info",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"actuator",
+										"info"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - HEALTH",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/actuator/health",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"actuator",
+										"health"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - BEANS",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/actuator/beans",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"actuator",
+										"beans"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - METRICS",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/actuator/metrics",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"actuator",
+										"metrics"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - ENV",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/actuator/env",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"actuator",
+										"env"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - HTTP TRACE",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/actuator/httptrace",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"actuator",
+										"httptrace"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - REFRESH",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/actuator/refresh",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"actuator",
+										"refresh"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Swagger",
+					"item": [
+						{
+							"name": "SWAGGER - Api Doc",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8081/v2/api-docs",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"v2",
+										"api-docs"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET - Get All Patients",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTY5NzMwMTIsInVzZXJJRCI6IjA2NzI3OWJkLWRlNjItNDYyMC1iNTc4LWVhNDgwMDAwYmNhMiIsInVzZXJuYW1lIjoicGFzc3dvcmQifQ.MY8KA4VElCeN4HBpnKEHIUoLC7C4bJGbUKDXXpeFZQg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/patient/getAll",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"patient",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET - Get Patient Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTY5NzMwMTIsInVzZXJJRCI6IjA2NzI3OWJkLWRlNjItNDYyMC1iNTc4LWVhNDgwMDAwYmNhMiIsInVzZXJuYW1lIjoicGFzc3dvcmQifQ.MY8KA4VElCeN4HBpnKEHIUoLC7C4bJGbUKDXXpeFZQg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/patient/get/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"patient",
+								"get",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET - Search Patient",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTY5NzMwMTIsInVzZXJJRCI6IjA2NzI3OWJkLWRlNjItNDYyMC1iNTc4LWVhNDgwMDAwYmNhMiIsInVzZXJuYW1lIjoicGFzc3dvcmQifQ.MY8KA4VElCeN4HBpnKEHIUoLC7C4bJGbUKDXXpeFZQg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/patient/search?search=c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"patient",
+								"search"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "c"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST - Create Patient Profile",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTY5NzMwMTIsInVzZXJJRCI6IjA2NzI3OWJkLWRlNjItNDYyMC1iNTc4LWVhNDgwMDAwYmNhMiIsInVzZXJuYW1lIjoicGFzc3dvcmQifQ.MY8KA4VElCeN4HBpnKEHIUoLC7C4bJGbUKDXXpeFZQg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstname\": \"test_firstname\",\n    \"lastname\": \"test_lastname\",\n    \"sexe\": \"M\",\n    \"birthday\": \"2020-01-01\",\n    \"address\": \"address\",\n    \"email\": \"email\",\n    \"phone\": \"phone\",\n    \"country\": \"country\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/patient/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"patient",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST - Add Patient",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTY5NzMwMTIsInVzZXJJRCI6IjA2NzI3OWJkLWRlNjItNDYyMC1iNTc4LWVhNDgwMDAwYmNhMiIsInVzZXJuYW1lIjoicGFzc3dvcmQifQ.MY8KA4VElCeN4HBpnKEHIUoLC7C4bJGbUKDXXpeFZQg"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "family",
+									"value": "TestNone",
+									"type": "text"
+								},
+								{
+									"key": "given",
+									"value": "Test",
+									"type": "text"
+								},
+								{
+									"key": "dob",
+									"value": "1966-12-31",
+									"type": "text"
+								},
+								{
+									"key": "sex",
+									"value": "F",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "1 Brookside St",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "100-222-3333",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/patient/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"patient",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT - Update Patient Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTY5NzMwMTIsInVzZXJJRCI6IjA2NzI3OWJkLWRlNjItNDYyMC1iNTc4LWVhNDgwMDAwYmNhMiIsInVzZXJuYW1lIjoicGFzc3dvcmQifQ.MY8KA4VElCeN4HBpnKEHIUoLC7C4bJGbUKDXXpeFZQg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\" : 1,\n    \"firstname\": \"test_firstname\",\n    \"lastname\": \"test_lastname\",\n    \"sexe\": \"M\",\n    \"birthday\": \"2020-01-01\",\n    \"address\": \"address\",\n    \"email\": \"email\",\n    \"phone\": \"phone\",\n    \"country\": \"GBR\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/patient/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"patient",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE - Delete Patient Profile",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTY5NzMwMTIsInVzZXJJRCI6IjA2NzI3OWJkLWRlNjItNDYyMC1iNTc4LWVhNDgwMDAwYmNhMiIsInVzZXJuYW1lIjoicGFzc3dvcmQifQ.MY8KA4VElCeN4HBpnKEHIUoLC7C4bJGbUKDXXpeFZQg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/patient/delete/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"patient",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ms-authentication",
+			"item": [
+				{
+					"name": "Actuator",
+					"item": [
+						{
+							"name": "ACTUATOR",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/actuator",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"actuator"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - INFO",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/actuator/info",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"actuator",
+										"info"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - HEALTH",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/actuator/health",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"actuator",
+										"health"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - BEANS",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/actuator/beans",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"actuator",
+										"beans"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - METRICS",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/actuator/metrics",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"actuator",
+										"metrics"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - ENV",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/actuator/env",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"actuator",
+										"env"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - HTTP TRACE",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/actuator/httptrace",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"actuator",
+										"httptrace"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - REFRESH",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/actuator/refresh",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"actuator",
+										"refresh"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Swagger",
+					"item": [
+						{
+							"name": "SWAGGER - Api Doc",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8083/v2/api-docs",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"v2",
+										"api-docs"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST - Generate token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"username\",\n    \"password\": \"password\",\n    \"rememberUser\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/generate-token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"generate-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET - Validate Token",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/validate-token?token=eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTY5NzMwMTIsInVzZXJJRCI6IjA2NzI3OWJkLWRlNjItNDYyMC1iNTc4LWVhNDgwMDAwYmNhMiIsInVzZXJuYW1lIjoicGFzc3dvcmQifQ.MY8KA4VElCeN4HBpnKEHIUoLC7C4bJGbUKDXXpeFZQg",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"validate-token"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTY5NzMwMTIsInVzZXJJRCI6IjA2NzI3OWJkLWRlNjItNDYyMC1iNTc4LWVhNDgwMDAwYmNhMiIsInVzZXJuYW1lIjoicGFzc3dvcmQifQ.MY8KA4VElCeN4HBpnKEHIUoLC7C4bJGbUKDXXpeFZQg"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ms-medicalRecord",
+			"item": [
+				{
+					"name": "Actuator",
+					"item": [
+						{
+							"name": "ACTUATOR",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/actuator",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"actuator"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - INFO",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/actuator/info",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"actuator",
+										"info"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - HEALTH",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/actuator/health",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"actuator",
+										"health"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - BEANS",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/actuator/beans",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"actuator",
+										"beans"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - METRICS",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/actuator/metrics",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"actuator",
+										"metrics"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - ENV",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/actuator/env",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"actuator",
+										"env"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - HTTP TRACE",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/actuator/httptrace",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"actuator",
+										"httptrace"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - REFRESH",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/actuator/refresh",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"actuator",
+										"refresh"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Swagger",
+					"item": [
+						{
+							"name": "SWAGGER - Api Doc",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/v2/api-docs",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"v2",
+										"api-docs"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET - Get all patient medical records",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTY5NzMwMTIsInVzZXJJRCI6IjA2NzI3OWJkLWRlNjItNDYyMC1iNTc4LWVhNDgwMDAwYmNhMiIsInVzZXJuYW1lIjoicGFzc3dvcmQifQ.MY8KA4VElCeN4HBpnKEHIUoLC7C4bJGbUKDXXpeFZQg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8082/medical-record/getAll/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"medical-record",
+								"getAll",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST - Create Medical Record",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTY5NzMwMTIsInVzZXJJRCI6IjA2NzI3OWJkLWRlNjItNDYyMC1iNTc4LWVhNDgwMDAwYmNhMiIsInVzZXJuYW1lIjoicGFzc3dvcmQifQ.MY8KA4VElCeN4HBpnKEHIUoLC7C4bJGbUKDXXpeFZQg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"patientId\": 1,\n    \"doctorName\": \"Dr. Doc\",\n    \"content\": \"content\",\n    \"active\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/medical-record/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"medical-record",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST - Add Medical Record",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTY5NzMwMTIsInVzZXJJRCI6IjA2NzI3OWJkLWRlNjItNDYyMC1iNTc4LWVhNDgwMDAwYmNhMiIsInVzZXJuYW1lIjoicGFzc3dvcmQifQ.MY8KA4VElCeN4HBpnKEHIUoLC7C4bJGbUKDXXpeFZQg"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "patId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "e",
+									"value": "Patient: TestNone Practitioner's notes/recommendations: Patient states that they are 'feeling terrific",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/patHistory/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"patHistory",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST - Update Medical Record",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTY5NzMwMTIsInVzZXJJRCI6IjA2NzI3OWJkLWRlNjItNDYyMC1iNTc4LWVhNDgwMDAwYmNhMiIsInVzZXJuYW1lIjoicGFzc3dvcmQifQ.MY8KA4VElCeN4HBpnKEHIUoLC7C4bJGbUKDXXpeFZQg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"5ffb399c57b9e94b6053c8ac\",\n    \"patientId\": 1,\n    \"active\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/medical-record/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"medical-record",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "ms-medicalReport",
+			"item": [
+				{
+					"name": "Actuator",
+					"item": [
+						{
+							"name": "ACTUATOR",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/actuator",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"actuator"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - INFO",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/actuator/info",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"actuator",
+										"info"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - HEALTH",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/actuator/health",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"actuator",
+										"health"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - BEANS",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/actuator/beans",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"actuator",
+										"beans"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - METRICS",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/actuator/metrics",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"actuator",
+										"metrics"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - ENV",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/actuator/env",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"actuator",
+										"env"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - HTTP TRACE",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/actuator/httptrace",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"actuator",
+										"httptrace"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - REFRESH",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/actuator/refresh",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"actuator",
+										"refresh"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Swagger",
+					"item": [
+						{
+							"name": "SWAGGER - Api Doc",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v2/api-docs",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v2",
+										"api-docs"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET - Get Patient medical report",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTY5NzMwMTIsInVzZXJJRCI6IjA2NzI3OWJkLWRlNjItNDYyMC1iNTc4LWVhNDgwMDAwYmNhMiIsInVzZXJuYW1lIjoicGFzc3dvcmQifQ.MY8KA4VElCeN4HBpnKEHIUoLC7C4bJGbUKDXXpeFZQg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/medical-report/generate-report/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"medical-report",
+								"generate-report",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST - Get Patient medical report (id)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTY5NzMwMTIsInVzZXJJRCI6IjA2NzI3OWJkLWRlNjItNDYyMC1iNTc4LWVhNDgwMDAwYmNhMiIsInVzZXJuYW1lIjoicGFzc3dvcmQifQ.MY8KA4VElCeN4HBpnKEHIUoLC7C4bJGbUKDXXpeFZQg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "patId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/assess/id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"assess",
+								"id"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST - Get Patient medical report (name)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"type": "text",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTY5NzMwMTIsInVzZXJJRCI6IjA2NzI3OWJkLWRlNjItNDYyMC1iNTc4LWVhNDgwMDAwYmNhMiIsInVzZXJuYW1lIjoicGFzc3dvcmQifQ.MY8KA4VElCeN4HBpnKEHIUoLC7C4bJGbUKDXXpeFZQg"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "familyName",
+									"value": "TestNone",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/assess/familyName",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"assess",
+								"familyName"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ms-clientui",
+			"item": [
+				{
+					"name": "Actuator",
+					"item": [
+						{
+							"name": "ACTUATOR",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8888/actuator",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8888",
+									"path": [
+										"actuator"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - INFO",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8888/actuator/info",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8888",
+									"path": [
+										"actuator",
+										"info"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - HEALTH",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8888/actuator/health",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8888",
+									"path": [
+										"actuator",
+										"health"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - BEANS",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8888/actuator/beans",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8888",
+									"path": [
+										"actuator",
+										"beans"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - METRICS",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8888/actuator/metrics",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8888",
+									"path": [
+										"actuator",
+										"metrics"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - ENV",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8888/actuator/env",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8888",
+									"path": [
+										"actuator",
+										"env"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - HTTP TRACE",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8888/actuator/httptrace",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8888",
+									"path": [
+										"actuator",
+										"httptrace"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ACTUATOR - REFRESH",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8888/actuator/refresh",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8888",
+									"path": [
+										"actuator",
+										"refresh"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Swagger",
+					"item": [
+						{
+							"name": "SWAGGER - Api Doc",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8888/v2/api-docs",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8888",
+									"path": [
+										"v2",
+										"api-docs"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
