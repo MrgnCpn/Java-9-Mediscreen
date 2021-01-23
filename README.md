@@ -98,7 +98,7 @@ Fro all services, you may access to :
 - ...
 
 ## APP Architecture
-![alt text]()
+![alt text](https://github.com/MrgnCpn/OC-Java-Project-9-Mediscreen/blob/main/app_architecture.jpg)
 
 ## URLS
 ### ems-eureka
