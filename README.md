@@ -50,12 +50,14 @@ Patient management application for healthcare professionals
 ## Install Project
 **WARNING** : Check if your localhost port are available before deploy app (3306 / 3307 / 27017 / 27018 / 8080 / 8081 / 8082 / 8083 / 8888 / 9001 / 9002 / 9003)
 
-###With Sheel script
+**INFO** : For test microservices and call endpoints you can import in your postman `mediscreen.postman_collection.json`
+
+### With Sheel script
 1. Start docker
 2. Run `./deploy-all.sh`
 3. Remove mongo_db_data container (Container for data import in mongodb)
 
-###Without Shell script
+### Without Shell script
 1. Start docker
 2. Deploy docker test databases environment with `./dckr_database_test/docker-compose up -d`
 3. Build all edge microservices and app microservices with `mvn clean build` command
