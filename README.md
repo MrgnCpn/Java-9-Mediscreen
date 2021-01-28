@@ -80,6 +80,7 @@ Patient management application for healthcare professionals
     > Check if mongo_db_data container is remove from your docker environment
     > Start docker app environement after deploy app
     > Go to http://localhost:8888/ in your browser
+    > Username : "username" / pwd : "password"
 
 ## Testing
 ### Run test
@@ -110,7 +111,7 @@ Fro all services, you may access to :
   * BROWSER : http://localhost:9003/ : Admin interface
 
 ### ms-clientui
-  * BROWSER : http://localhost:8888/ : App interface
+  * BROWSER : http://localhost:8888/ : App interface (Username : username / pwd : password)
 
 ## Endpoints
 ### ACTUATOR (GET)
