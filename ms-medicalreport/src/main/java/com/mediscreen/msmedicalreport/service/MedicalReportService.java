@@ -105,7 +105,6 @@ public class MedicalReportService implements MedicalReportServiceInterface {
     public Integer countTrigger(List<MedicalRecord> medicalRecordList){
         Integer triggerCount = 0;
         List<String> triggerList = new ArrayList<>();
-        triggerList.add("h[eé]moglobine A1C");
         triggerList.add("microalbumine");
         triggerList.add("taille");
         triggerList.add("poids");
@@ -120,6 +119,7 @@ public class MedicalReportService implements MedicalReportServiceInterface {
         if (medicalRecordList != null && medicalRecordList.size() > 0) {
             for (MedicalRecord medicalRecord : medicalRecordList) {
                 if(medicalRecord.isActive() && !StringUtils.isBlank(medicalRecord.getContent())){
+                    if (medicalRecord.getContent().matches("(?i:.*h[eé]moglobine A1C.*)")) triggerCount++;
                     String contentSplit[] = medicalRecord.getContent().split(" ");
                     for (String str : contentSplit) {
                         for (String trigger : triggerList) {
